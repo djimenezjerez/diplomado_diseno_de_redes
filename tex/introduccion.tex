@@ -13,7 +13,7 @@
 
   Para solventar tal limitación es que los fabricantes de microprocesadores cambiaron el paradigma de desarrollo de hardware de la arquitectura mono-núcleo a la arquitectura multi-núcleo. Posterior a este cambio se pudo observar que el límite del número de procesadores de uso general ha llegado también a un límite difícil de superar debido al calentamiento al que son sometidos los circuitos integrados dentro de dichos procesadores ya que la temperatura es inversamente proporcional al tamaño de los dispositivos y al trabajo de cómputo que se designa a cada circuito; por ello muchas aplicaciones actuales hacen uso de recursos definidos para tareas específicas, por ejemplo para el cómputo de bloques muy grandes de imágenes o videos, se utilizan tarjetas gráficas que procesan volúmenes gigantescos de datos para entregar el resultado nuevamente al procesador central o bien para mostrar el resultado por pantalla u otro dispositivo de salida.
 
-  Debido a la carga de tareas que se asigna a la CPU, ésta puede llegar a formar colas insostenibles de procesos, por lo tanto, se intentará demostrar la factibilidad de la distribución de tareas a los procesadores de la Unidad de Procesamiento Gráfico (GPU) para incrementar la velocidad de ejecución del algoritmo Estándar de Encriptación Avanzado (AES).
+  Debido a la carga de tareas que se asigna a la CPU, ésta puede llegar a formar colas insostenibles de procesos, por lo tanto, se intentará demostrar la factibilidad de la distribución de tareas a los procesadores de la Unidad de Procesamiento Gráfico (GPU\footnote{Graphics Processing Unit}) para incrementar la velocidad de ejecución del algoritmo Estándar de Encriptación Avanzado (AES).
 
   \section{Importancia teórica y práctica}
 
@@ -50,23 +50,6 @@
   \section{Método de investigación}
 
   El método que de enfoque para el desarrollo del proyecto es el método cuantitativo, ya que los objetivos se demuestran con tablas comparativas de resultados; empírico, ya que se ejecutaron programas de cómputo para llegar a los resultados; racionalista, ya que los resultados se toman en cuenta sin ninguna interpretación previa y positivista, ya que se desea demostrar el la aserción del incremento de velocidad de ejecución del algoritmo AES en GPU con respecto a la velocidad de ejecución en CPU.
-
-  \section{Alcances}
-
-  El algoritmo implementado y modificado para la obtención de resultados en CPU y GPU, cumple con la definición de la Publicación de Estándares de Procesamiento de Información Federal 197\footnote{Federal Information Processing Standards Publications - FIPS 197 \cite{report:FIPS_197}}. \cite{report:FIPS_197}. Dicha publicación fué aprobada por el Instituto Nacional de Estándares y Tecnología\footnote{National
-  Institute of Standards and Technology - NIST} después de la verificación en la Reforma de Administración de Tecnologías de la Información\footnote{Information Technology Management Reform} de 1996.
-
-  El relleno de datos de 128 bits cumple con el Estándar de Criptografía de Llave Pública PKCS \#7 plasmado en el reporte RFC 2315 \cite{report:RFC_2315}.
-
-  \includegraphics[width=7cm, keepaspectratio]{introduccion/intel_i7.jpg}
-  %------------ TODO cite --------------%
-  TODO cite imagen
-
-  En cuanto al hardware, se realizó la comparación de tiempo de ejecución en el microprocesador Intel i7-3770\footnote{https://tinyurl.com/yb3tqpvu} con respecto a la tarjeta gráfica NVidia GTX 650 Ti\footnote{https://tinyurl.com/ycr3kouv}. Lo que representa una comparativa de trabajo simultáneo de 8 núcleos trabajando a 3.4GHz versus 768 núcleos trabajando a 928MHz para las operaciones pasibles a paralelismo.
-
-  \includegraphics[width=12cm, keepaspectratio]{introduccion/gtx_650ti.png}
-  %------------ TODO cite --------------%
-  TODO cite imagen
 
   \bibliografia
 \end{document}
