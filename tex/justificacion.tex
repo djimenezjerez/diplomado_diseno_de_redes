@@ -1,0 +1,55 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\espacio
+
+  En este capítulo se muestran la justificación del problema con una visión desde diferentes ámbitos o enfoques de acuerdo a los paradigmas tecnológico y científico.
+
+  \section{Justificación tecnológica}
+
+  Como se mencionó anteriormente, de acuerdo al paradigma actual del desarrollo de hardware de microprocesadores, se llegó a un límite difícil de superar con los materiales de fabricación actuales.
+
+  Intel propuso el modelo de desarrollo de hardware ``Tick-Tock'' que consiste en un lanzamiento cada 18 meses (1 año y medio), ambas palabras hacen referencia a:
+
+  \begin{description}
+    \item[Tick:] Mejoría de una arquitectura anterior
+    \item[Tock:] Lanzamiento de una nueva arquitectura
+  \end{description}
+
+  Pero si se realiza una comparación del último ``Tock'' que realizó Intel con respecto al microprocesador de la gama i7, se obtiene un resultado claro, y es que en 6 años se redujo el tamaño de transistor de 22nm a 14nm, duplicando los procesadores para llegar a un total de 8 procesadores físicos del CPU Intel i7-3770 del año 2012 al procesador Intel i7-9900 del año 2018. Pero la frecuencia se incrementó tan solo en 2MHz, por lo tanto se puede concluir que el paradigma tiene como objetivo llegar a multiplicar el número de procesadores pero no así la frecuencia de trabajo de los mismos.
+
+  \begin{table}[]
+    \begin{tabular}{|p{5.6cm}|p{4cm}|p{4cm}|}
+      \hline
+      \multicolumn{1}{|c|}{\textbf{Característica}} & \textbf{I7-9900K} & \textbf{I3-3770} \\ \hline
+      Núcleos & 8 & 4 \\ \hline
+      Hilos & 16 & 8 \\ \hline
+      Serie & Coffee Lake & Ivy Bridge \\ \hline
+      Socket & FCLGA1151 & FCLGA1155 \\ \hline
+      Fecha de lanzamiento & 4º trimestre de 2018 & 2º trimestre de 2012 \\ \hline
+      Cache & 16 MB & 8 MB \\ \hline
+      Set de instrucciones & Intel® SSE4.1, Intel® SSE4.2, Intel® AVX2 & SSE4.1/4.2, AVX \\ \hline
+      Litografía & 14 nm & 22 nm \\ \hline
+      Velocidad de bus & 8 GT/s DMI3 & 5 GT/s DMI \\ \hline
+      Solución térmica & PCG 2015D (130W) & 2011D \\ \hline
+      Máximo tamaño de memoria & 64 GB & 32 GB \\ \hline
+      Tipo de memoria & DDR4-2666 & DDR3 1333/1600 \\ \hline
+      Ancho de banda de memoria & 41.6 GB/s & 25.6 GB/s \\ \hline
+      Frecuencia base para gráficos & 350 MHz & 650 MHz \\ \hline
+      Frecuencia máxima para gráficos & 1.20 GHz & 1.15 GHz \\ \hline
+      Configuración de PCI Express & 1x16, 2x8, 1x8+2x4 & 1x16, 2x8, 1x8 \& 2x4 \\ \hline
+    \end{tabular}
+  \end{table}
+
+  Por lo tanto se justifica el uso de la Unidad de Procesamiento Gráfico para la distribución de tareas repetitivas aptas para un enfoque de ejecución en paralelo, ya que de acuerdo a la tabla comparativa anterior se observa que el paradigma de desarrollo de hardware por parte de los fabricantes es hacia un ecosistema de procesadores en paralelo en lugar de un bajo número de procesadores trabajando a frecuencias altas.
+
+  \section{Justificación científica}
+
+
+
+
+
+
+
+  \bibliografia
+\end{document}
