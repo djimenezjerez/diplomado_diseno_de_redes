@@ -11,10 +11,10 @@
 \usepackage{standalone}
 %-----------------------------------%
 %------- Generar espacio en los pdf's incluidos -------%
-\newcommand{\mainFilename}{.principal.tex} %------- Nombre del archivo principal -------%
+\newcommand{\mainFilename}{main/main.tex} %------- Nombre del archivo principal -------%
 \newcommand{\espacio}{
   \ifnum\pdfstrcmp{\jobname}{\mainFilename}=-1
-    \vspace*{1.3em} %------- Espacio antes del texto -------%
+    \vspace*{3em} %------- Espacio antes del texto -------%
   \fi
 }
 %-------------------------------------------------------%
@@ -39,7 +39,7 @@
 %-----------------------------------------%
 %------- Importar gráficas de ruta específica -------%
 \usepackage{graphicx} %------- Para especificar tamaño de gráficos -------%
-\graphicspath{{img/}{../img/}{inc/}{../inc/}}
+\graphicspath{{../img/}{../inc/}}
 %----------------------------------------------------%
 \usepackage{pdflscape} %------- Para hojas en paisaje -------%
 \usepackage{textcomp} %------- Tamaños de letras especiales -------%
