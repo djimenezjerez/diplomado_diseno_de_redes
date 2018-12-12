@@ -17,33 +17,19 @@
 
   \section{Importancia teórica y práctica}
 
+  \begin{table}[H]
+    \centering
+    \caption{Aplicaciones del algoritmo AES}
+    \input{\main/inc/tabla_uso_aes}
+    \caption*{\textbf{Fuente:} \href{https://en.wikipedia.org/wiki/AES_implementations\#Applications}{Implementaciones AES, Aplicaciones, Wikipedia}}
+    \label{tabla_uso_aes}
+  \end{table}
+
   El Estándar Avanzado de Encriptación (AES) es utilizado en muchas aplicaciones actuales debido a su característica de patrón abierto para uso público y privado en aplicaciones personales y empresariales.
 
-  \begin{table}[]
-    \begin{tabular}{|p{6cm}|p{8cm}|}
-      \hline
-      \multicolumn{1}{|c|}{\textbf{USO}} & \multicolumn{1}{c|}{\textbf{APLICACIONES}}       \\ \hline
-      Compresiòn de datos & 7z, Amanda Backup, PeaZip, PKZIP, RAR, WinZip, UltraISO 
-      \\ \hline
-      Encriptación de archivos & Gpg4win, Ncrypt
-      \\ \hline
-      Encriptación de particiones de disco duro & NTFS, BTRFS
-      \\ \hline
-      Encriptación de discos duros & BitLocker, CipherShed, DiskCryptor, FileVault, GBDE, Geli, LibreCrypt, LUKS, Private Disk, VeraCrypt
-      \\ \hline
-      Seguridad en comunicaciones LAN & CCMP, ITU-T G.hn, IPsec
-      \\ \hline
-      Seguridad en comunicaciones en Internet & GPG, TLS, SSL
-      \\ \hline
-      Otras aplicaciones & KeePass Password Safe, Pidgin, Google Allo, Facebook Messenger, WhatsApp
-      \\ \hline
-    \end{tabular}
-  \end{table}
-  TODO CITE TABLA 1 \cite{book:design_rijndael}
+  Cualquier incremento en la velocidad de ejecución de este algoritmo es de gran importancia práctica, ya que, como se muestra en el cuadro \ref{tabla_uso_aes}, los protocolos SSL y TLS trabajan con encriptación AES, y es sabido que una gran parte de los servicios brindados en VPN y HTTPS para red local y/o internet transmiten grandes bloques de información enctriptada, por lo cual la ejecución de este proceso debe ser lo más rápida posible a fin de evitar latencia en las comunicaciones.
 
-  Cualquier incremento en la velocidad de ejecución de este algoritmo es de gran importancia práctica, ya que, como se muestra en la tabla ((((TODO 1)))), los protocolos SSL y TLS trabajan con encriptación AES, y es sabido que una gran parte de los servicios brindados en VPN y HTTPS para red local y/o internet transmiten grandes bloques de información enctriptada, por lo cual la ejecución de este proceso debe ser lo más rápida posible a fin de evitar latencia en las comunicaciones.
-
-  Por otra parte, en lo que respecta a la teoría de hilos y paralelismo de ejecución de procesos, la investigación del uso de tarjetas gráficas como unidades de procesamiento de datos es todavía un área joven sobre la cual se está comenzando a investigar, con el desarrollo de la tecnología TITAN de NVidia \footnote{TODO https://www.nvidia.com/en-us/titan/titan-rtx/}, misma que pone a disposición mallas de miles de procesadores Tensor y CUDA; dichos procesadores son núcleos de uso específico y no cuentan con las capacidades de los procesadores de uso general.
+  Por otra parte, en lo que respecta a la teoría de hilos y paralelismo de ejecución de procesos, la investigación del uso de tarjetas gráficas como unidades de procesamiento de datos es todavía un área joven sobre la cual se está comenzando a investigar, con el desarrollo de la tecnología TITAN de NVidia \footnote{\href{https://www.nvidia.com/en-us/titan/titan-rtx/}{Tecnología NVidia Titan RTX}}, misma que pone a disposición mallas de miles de procesadores Tensor y CUDA; dichos procesadores son núcleos de uso específico y no cuentan con las capacidades de los procesadores de uso general.
 
   Entre los aspectos que caracterizan estas tecnologías de procesamiento están principalmente las operaciones matriciales, las operaciones de bucle independiente y las operaciones de transformación de datos.
 
