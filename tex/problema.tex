@@ -9,7 +9,7 @@
 
   En el contexto de la computación, los procesos a ejecutarse ingresan a una cola de espera que dependiendo del trabajo del procesador, estos procesos pueden tardar un tiempo considerable en ser atendidos, e inclusive desecharse por la excesiva carga de trabajo de la CPU. En las comunicaciones encriptadas, dada la lógica inherente de los procesos de encriptación, los tiempos de ejecución pueden llegar a incrementarse hasta un punto insostenible para un solo procesador. Por lo cual los fabricantes vieron necesario el incremento del número de procesadores a fin de atender los procesos en la cola y evitar desechar tareas por los tiempos de ejecución.
 
-  Desde otro punto de vista, se cuenta con otra alternativa de procesamiento descentralizado mediante la delegación de trabajos a la GPU. Por tanto se verificará la reducción del tiempo de ejecución del algoritmo de encriptación AES mediante la delegación de procesos a la GPU haciendo uso del entorno de programación Python, que cuenta con compatibilidad nativa para la ejecución de tareas en matrices de procesadores CUDA mediante la librería Numba\footnote{http://numba.pydata.org/}.
+  Desde otro punto de vista, se cuenta con otra alternativa de procesamiento descentralizado mediante la delegación de trabajos a la GPU. Por tanto se verificará la reducción del tiempo de ejecución del algoritmo de encriptación AES mediante la delegación de procesos a la GPU haciendo uso del entorno de programación Python, que cuenta con compatibilidad nativa para la ejecución de tareas en matrices de procesadores CUDA mediante la librería Numba\footnote{\href{http://numba.pydata.org/numba-doc/latest/cuda/index.html}{NumPy+Mamba=Numba: Array-oriented Python Compiler for NumPy}}.
 
   \section{Límites y alcances}
 
@@ -26,7 +26,7 @@
 
   En cuanto al hardware, se realiza la comparación de tiempo de ejecución en el microprocesador Intel i7-3770\footnote{\href{https://tinyurl.com/yb3tqpvu}{Intel® Core™ i7-3770 Processor, ark.intel.com}} con respecto a la tarjeta gráfica NVidia GTX 650 Ti\footnote{\href{https://tinyurl.com/ycr3kouv}{NVidia GeForce GTX-650Ti, www.geforce.com}}. Lo que representa una comparativa de trabajo simultáneo de 8 núcleos trabajando a 3.4GHz versus 768 núcleos trabajando a 928MHz para las operaciones pasibles a paralelismo.
 
-  El algoritmo utilizado modificado para esta investigación fué escrito por Pablo Caro y es de código abierto, se puede encontrar en la plataforma Github\footnote{https://github.com/pcaro90/Python-AES}.
+  El algoritmo utilizado modificado para esta investigación fué escrito por Pablo Caro y es de código abierto, se puede encontrar en la plataforma Github\footnote{\href{https://github.com/pcaro90/Python-AES}{Python-AES, Pablo Caro}}.
 
   \begin{figure}[H]
     \centering
@@ -35,7 +35,7 @@
     \caption*{\textbf{Fuente:} \href{https://tinyurl.com/ycr3kouv}{NVidia GeForce GTX-650Ti, www.geforce.com}}
   \end{figure}
 
-  Se realizaron modificaciones a este algoritmo mediante la librería Numba\footnote{http://numba.pydata.org/numba-doc/latest/cuda/index.html} que cuenta con decoradores predefinidos que compilan el código a ser paralelizado previa ejecución del programa. Esta librería genera kernels compatibles con plataformas CUDA de distintas arquitecturas.
+  Se realizaron modificaciones a este algoritmo mediante la librería Numba que cuenta con decoradores predefinidos que compilan el código a ser paralelizado previa ejecución del programa. Esta librería genera kernels compatibles con plataformas CUDA de distintas arquitecturas.
 
   El sistema operativo utilizado para la investigación es Arch Linux con el Kernel versión 4.18.10.
   
