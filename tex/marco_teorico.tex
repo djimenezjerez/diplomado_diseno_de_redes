@@ -23,6 +23,47 @@
 
   \textit{Las técnicas principales para lograr estas mejoras de rendimiento (mayor frecuencia de reloj y arquitecturas cada vez más inteligentes y complejas) están golpeando la llamada ``Power Wall''. La industria informática ha aceptado que los futuros aumentos en rendimiento deben provenir en gran parte del incremento del número de procesadores (o núcleos) en una matriz, en vez de hacer más rápido un solo núcleo.} \cite{report:parallel_computing_illinois}
 
+  El incremento de la frecuencia en los microprocesador acarrea consigo el consumo de energía y la disminución del espacio entre los transistores dentro de cada núcleo, lo que provoca un incremento considerable de la temperatura dentro del microprocesador; por tanto, para mantener el microprocesador en funcionamiento evitando su deterioro por las temperaturas elevadas es necesario buscar fuentes más óptimas de enfriado como los tubos de conducción de gas o líquido, que incrementan aún más el consumo de energía y que son costosos para una PC de escritorio.
+
+  \begin{equation}
+    T_m = T_a \cdot [( 1 - F_m ) + \frac{F_m}{A_m}]
+    \label{ecuacion_amdahl}
+  \end{equation}
+
+  Donde:
+
+  \begin{description}[noitemsep, nolistsep]
+    \item[$F_m=$] Fracción de tiempo que el sistema utiliza el subsistema mejorado
+    \item[$A_m=$] Factor de mejora que se ha introducido en el subsistema mejorado
+    \item[$T_a=$] Tiempo de ejecución antiguo
+    \item[$T_m=$] Tiempo de ejecución mejorado
+  \end{description}
+
+  Por tales motivos Gene Amdahl formuló la ecuación \ref{ecuacion_amdahl} que establece que:
+
+  \textit{La mejora obtenida en el rendimiento de un sistema debido a la alteración de uno de sus componentes está limitada por la fracción de tiempo que se utiliza dicho componente}
+
+  Despejando la ecuación \ref{ecuacion_amdahl} se obtiene la aceleración del programa completo una vez que se haya paralelizado uno o más algoritmos del programa.
+
+  \begin{equation}
+    A = \frac{1}{( 1 - F_m ) + \frac{F_m}{A_m}}
+    \label{ecuacion_amdahl_aceleracion}
+  \end{equation}
+
+  Donde:
+
+  \begin{description}[noitemsep, nolistsep]
+    \item[$A=$] Aceleración o ganancia en velocidad conseguida en el sistema completo debido a la mejora de uno de sus subsistemas
+    \item[$A_m=$] Factor de mejora que se ha introducido en el subsistema mejorado
+    \item[$F_m=$] Fracción de tiempo que el sistema utiliza el subsistema mejorado
+  \end{description}
+
+
+
+
+
+
+
 
 
   \bibliografia
