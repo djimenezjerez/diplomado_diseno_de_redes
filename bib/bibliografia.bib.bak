@@ -23,14 +23,14 @@
   url       = {https://www.amazon.com/Design-RijndaeL-Encryption-Information-Cryptography/dp/3540425802?SubscriptionId=AKIAIOBINVZYXZQZ2U3A&tag=chimbori05-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=3540425802},
 }
 
-@Manual{report:RFC_2315,
-  title        = {{PKCS \#7: Cryptographic Message Syntax Version 1.5}},
+@Misc{report:RFC_2315,
   author       = {B. Kaliski},
+  title        = {{PKCS \#7: Cryptographic Message Syntax Version 1.5}},
+  howpublished = {Internet Requests for Comments},
   month        = {March},
   year         = {1998},
   note         = {\url{http://www.rfc-editor.org/rfc/rfc2315.txt}},
   doi          = {10.17487/rfc2315},
-  howpublished = {Internet Requests for Comments},
   institution  = {RFC Editor},
   issn         = {2070-1721},
   number       = {2315},
@@ -39,11 +39,11 @@
   url          = {http://www.rfc-editor.org/rfc/rfc2315.txt},
 }
 
-@Manual{report:FIPS_197,
-  title                = {{Federal Information Processing Standards Publication ({FIPS} 197). {Advanced Encryption Standard (AES)}}},
+@TechReport{report:FIPS_197,
   author               = {Federal Information},
-  month                = nov,
+  title                = {{Federal Information Processing Standards Publication ({FIPS} 197). {Advanced Encryption Standard (AES)}}},
   year                 = {2001},
+  month                = nov,
   citeulike-article-id = {2470825},
   comment              = {\url{http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf}},
   keywords             = {bibtex-import},
