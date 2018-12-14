@@ -6,8 +6,6 @@
 
 \frontmatter
 \setcounter{page}{1}
-
-  \renewcommand{\bibliografia}{} %------- No generar automáticamente la bibliografía -------%
   %------- Página de título -------%
   \subfile{../tex/titulo.tex}
   \clearpage %------- Nueva página -------%
@@ -76,6 +74,6 @@
   \phantomsection
   \addcontentsline{toc}{chapter}{Bibliografía}
   \nocite{*} %------- Eliminar formato por defecto de bibliografía -------%
-  \bibliographystyle{apa} %------- Formatear bibliografía a APA -------%
-  \bibliography{../bib/bibliografia}
+  \printbibliography
+
 \end{document}

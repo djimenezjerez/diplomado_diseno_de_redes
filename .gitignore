@@ -25,4 +25,9 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.bib.bak
+*.bak
+*.sav
+*.bcf
+*.run.xml
 .vscode/

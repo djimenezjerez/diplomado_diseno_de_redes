@@ -19,7 +19,7 @@
 }
 %-------------------------------------------------------%
 %\usepackage{estilo} %------- Importar Estilo -------%
-
+\usepackage[T1]{fontenc}
 \usepackage[spanish]{babel} %------- Entorno de latex en español -------%
 \usepackage[utf8]{inputenc} %------- Acentos nativos -------%
 \linespread{1.5} %------- Doble espacio interlineado -------%
@@ -72,18 +72,10 @@
 %\setlength{\parskip}{\baselineskip} %------- Espacio entre párrafos -------%
 \setlength{\parskip}{9pt} %------- Espacio entre párrafos -------%
 \setlength{\parindent}{0pt} %------- No identar al inicio de los parrafos -------%
-\usepackage[square, sort, comma, numbers]{natbib} %------- Para importar bibliografía -------%
 \usepackage{wrapfig} %------- Figuras en línea con el texto -------%
 %-------- Control de huérfanos --------%
 \widowpenalty=1000
 \clubpenalty=1000
-%--------------------------------------%
-\addto{\captionsspanish}{\renewcommand{\bibname}{\hspace*{\fill}\large\bfseries Bibliografía \hspace*{\fill}}} %------- Cambio de Bibliografía a Referencias -------%
-%-------- Estilo de bibliografía y ruta específica --------%
-\newcommand{\bibliografia} {
-  \bibliographystyle{acm}
-  \bibliography{../bib/bibliografia}
-}
 %----------------------------------------------------------%
 \usepackage{enumitem} %------- Generar listas -------%
 \usepackage{colortbl} %------- Tablas con colores -------%
@@ -131,6 +123,11 @@
 \counterwithout{figure}{section} %------- Quitar sección de figuras -------%
 \counterwithout{table}{chapter} %------- Quitar capítulo de cuadros -------%
 \counterwithout{table}{section} %------- Quitar sección de cuadros -------%
+%----------------------------------------------------------------------%
+\usepackage{csquotes}
+\usepackage[style=apa, backend=biber]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\bibliography{../bib/bibliografia.bib}
 %------- Eliminar espacio antes de anexos y bibliografía -------%
 \usepackage{titlesec}
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename~\thechapter}{0cm}{\Huge}

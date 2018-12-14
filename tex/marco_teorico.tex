@@ -21,7 +21,7 @@
 
   Los microprocesadores actuales contienen comúnmente dos tipos de núcleos, los núcleos físicos y los núcleos lógicos. Cada zócalo de una tarjeta madre contiene un microprocesador, este contiene uno o más núcleos físicos; un núcleo físico es aquel que se encuentra físicamente dentro del circuito integrado del microprocesador, mientras que un núcleo lógico es una división virtual en 2 o más partes de un núcleo físico. Las tareas son asignadas a los núcleos físicos; estas tareas pueden dividirse en tareas más pequeñas a fin de resolver un gran problema en partes pequeñas que al final serán unidas para generar la solución, estas partes pequeñas son llamadas ``hilos'' y son las que se ejecutan en los núcleo lógicos.
 
-  \textit{Las técnicas principales para lograr estas mejoras de rendimiento (mayor frecuencia de reloj y arquitecturas cada vez más inteligentes y complejas) están golpeando la llamada ``Power Wall''. La industria informática ha aceptado que los futuros aumentos en rendimiento deben provenir en gran parte del incremento del número de procesadores (o núcleos) en una matriz, en vez de hacer más rápido un solo núcleo.} \cite{report:parallel_computing_illinois}
+  \textit{Las técnicas principales para lograr estas mejoras de rendimiento (mayor frecuencia de reloj y arquitecturas cada vez más inteligentes y complejas) están golpeando la llamada ``Power Wall''. La industria informática ha aceptado que los futuros aumentos en rendimiento deben provenir en gran parte del incremento del número de procesadores (o núcleos) en una matriz, en vez de hacer más rápido un solo núcleo.} [\cite[p.~6]{report:parallel_computing_illinois}]
 
   El incremento de la frecuencia en los microprocesador acarrea consigo el consumo de energía y la disminución del espacio entre los transistores dentro de cada núcleo, lo que provoca un incremento considerable de la temperatura dentro del microprocesador; por tanto, para mantener el microprocesador en funcionamiento evitando su deterioro por las temperaturas elevadas es necesario buscar fuentes más óptimas de enfriado como los tubos de conducción de gas o líquido, que incrementan aún más el consumo de energía y que son costosos para una PC de escritorio.
 
@@ -58,6 +58,37 @@
     \item[$F_m=$] Fracción de tiempo que el sistema utiliza el subsistema mejorado
   \end{description}
 
+  \begin{figure}[H]
+    \centering
+    \caption{Clúster de alto rendimiento}
+    \includegraphics[width=10cm, keepaspectratio]{marco_teorico/cluster_alto_rendimiento.jpg}
+    \caption*{\textbf{Fuente:} \cite[p.~2]{article:cluster_alto_rendimiento}}
+  \end{figure}
+
+  En base a este principio se desarrollaron tecnologías de matrices de núcleos de cómputo tomando como elementos principales a los procesadores existentes y acomodándolos de tal forma que se pueda administrar la ejecución de tareas en cada procesador de manera individual y la sincronización de resultados al final del proceso. Estos arreglos reciben el nombre de clústers. Los clústers de alto rendimiento son un tipo de clústers utilizados con el propósito de ejecutar tareas exhaustivas divididas en tareas pequeñas ejecutadas en cada computador de acuerdo a la gestión realizada por el llamado nodo maestro. [\cite{article:cluster_alto_rendimiento}]
+
+  \begin{figure}[H]
+    \centering
+    \caption{Comparación de tiempos de proceso en múltiples CPUs}
+    \includegraphics[width=15cm, keepaspectratio]{marco_teorico/resultado_cpu_cluster.png}
+    \caption*{\textbf{Fuente:} \cite[p.~7]{article:cluster_alto_rendimiento}}
+  \end{figure}
+
+  \section{Unidad de procesamiento gráfico (GPU)}
+
+  Esta unidad actúa como un co-procesador que se encarga de las operaciones matriciales o de coma flotante, por lo general los procesos gráficos de transformación o renderización son distribuidos a la o las GPUs desde el procesador central CPU.
+
+  Dado el estudio generado sobre las plataformas GPU, los fabricantes pusieron a disposición de los usuarios herramientas de desarrollo para utilizar las GPU como ayuda en cálculos de álgebra dispersa, tensores en dinámica de fluidos, minería de datos, inteligencia artificial, deep learning, etc, con lo cual la denominación de las GPU abiertas a otro tipo de uso más que el simple uso gráfico cambió a GPGPU\footnote{Unidad de Procesamiento Gráfico de Uso General (General Purpose Graphics Processing Unit)}.
+
+  Estas tarjetas están desarrolladas en base al paralelismo de núcleos de frecuencia baja con un esquema de operaciones limitado.
+
+  \begin{figure}[H]
+    \centering
+    \caption{Cantidad de núcleos en CPU vs GPU}
+    \includegraphics[width=15cm, keepaspectratio]{marco_teorico/cpu_vs_gpu_cores.jpg}
+    \caption*{\textbf{Fuente:} \cite{web:gpgpu}}
+  \end{figure}
+  
 
 
 
@@ -66,5 +97,5 @@
 
 
 
-  \bibliografia
+  \printbibliography
 \end{document}
