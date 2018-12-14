@@ -27,14 +27,14 @@
 \usepackage{geometry}
 \geometry{
   letterpaper,
-  total={217.0mm,280.0mm},
   top=25mm,
   right=30mm,
   bottom=25mm,
   left=35mm,
   footskip=15mm,
   nohead,
-  nomarginpar
+  nomarginpar,
+  heightrounded
 }
 %-----------------------------------------%
 %------- Importar gráficas de ruta específica -------%
@@ -114,8 +114,6 @@
   \fancyhead{} %------- Eliminar cabeceras -------%
   \fancyfoot{} %------- Eliminar pies de página -------%
   \fancyfoot[R]{\thepage} %------- Númerar abajo derecha -------%
-  \renewcommand{\headrulewidth}{0pt} %------- Quitar línea de cabecera -------%
-  \renewcommand{\footrulewidth}{0pt} %------- Quitar línea de pie de página -------%
 }
 %------- Eliminar capítulo y sección del conteo de figuras y cuadros -------%
 \usepackage{chngcntr}
