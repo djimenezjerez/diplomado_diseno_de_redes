@@ -104,7 +104,7 @@
   url    = {https://www.anandtech.com/show/13012/micron-begins-mass-production-of-gddr6},
 }
 
-@Standard{standard:iso_18033,
+@Article{standard:iso_18033,
   title        = {ISO/IEC 18033-1:2015},
   organization = {International Organization for Standardization},
   institution  = {International Electrotechnical Commission},
@@ -118,6 +118,14 @@
   author = {IBM},
   title  = {Summit Super-Computer},
   year   = {2018},
+  note   = {17 de Diciembre de 2018},
+  url    = {http://www.dataqubo.com/encriptacion-que-tan-seguro-es-aes/},
+}
+
+@Misc{web:tiempo_crack_aes,
+  author = {DataQUBO},
+  title  = {¿Qué tan seguro es AES?},
+  year   = {2013},
   note   = {17 de Diciembre de 2018},
   url    = {https://www.top500.org/system/179397},
 }
