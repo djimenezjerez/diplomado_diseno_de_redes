@@ -48,13 +48,15 @@
 \usepackage{gensymb} %------- Generador de símbolos -------%
 \usepackage{caption} %------- Referencias en figuras y cuadros -------%
 %------- Enlaces a páginas web -------%
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks, unicode=true]{hyperref}
 \hypersetup{
   colorlinks=false,
   linktoc=all,
   linkcolor=blue
 }
 %-------------------------------------%
+\usepackage[bottom, hang, flushmargin]{footmisc} %------- Pie de página siempre al borde inferior -------%
+\usepackage{footnotebackref}
 %------- Eliminar espacio antes de las figuras -------%
 \usepackage{etoolbox}
 \BeforeBeginEnvironment{wrapfigure}{\vskip-0.5em}
@@ -68,7 +70,6 @@
 \hyphenpenalty=10000
 \hbadness=10000
 %-----------------------------------%
-\usepackage[bottom]{footmisc} %------- Pie de página siempre al borde inferior -------%
 \usepackage{float} %------- Elementos flotantes -------%
 %\setlength{\parskip}{\baselineskip} %------- Espacio entre párrafos -------%
 \setlength{\parskip}{9pt} %------- Espacio entre párrafos -------%
