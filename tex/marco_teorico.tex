@@ -113,7 +113,33 @@
 
   El Estándar de Encriptación Avanzada fue de desarrollado mediante un concurso en 1997, por los criptógrafos Vincent Rijmen e Joan Daemen en el año 2001, como la sustitución al algoritmo DES\footnote{Estándar de Encriptación de Datos(Data Encryption Standard)} que había sido crackeado mediante la máquina DES Cracker construida por la ONG Electronic Frontier Foundation, con una inversión de 250 mil dólares. Este estándar fue aprobado y es utilizado por entes reguladores como la NSA\footnote{Agencia de Seguridad Nacional(National Security Agency)} y se estandariza mediante la norma ISO/IEC 18033 [\cite{standard:iso_18033}].
 
-  El algoritmo AES Rijndael es un algoritmo de llave simétrica, lo cual indica que se utiliza una misma llave para cifrar y descifrar los mensajes en el lado del emisor y del receptor. Por tal razón, toda la seguridad recae en proteger la clave secreta, por tal razón el abanico de claves posibles debe ser de una cantidad tan grande que el intruso deba realizar pruebas, por inclusive años, para poder descifrar el mensaje. Para el caso de DES, la clave es de 56 bits por lo que la cantidad de claves será igual a: $2^{56} = 7.2 x 10^{16}$ posibles claves; un computador actual puede lograr descifrar un mensaje mediante el cálculo de la llave secreta en un tiempo de tan solo segundos.
+  El algoritmo AES Rijndael es un algoritmo de llave simétrica, lo cual indica que se utiliza una misma llave para cifrar y descifrar los mensajes en el lado del emisor y del receptor. Por tal razón, toda la seguridad recae en proteger la clave secreta, por tal razón el abanico de claves posibles debe ser de una cantidad tan grande que el intruso deba realizar pruebas, por inclusive años, para poder descifrar el mensaje. Para el caso de DES, la clave es de 56 bits por lo que la cantidad de claves será igual a: $2^{56} = 7.2 \times 10^{16}$ posibles claves; un computador actual puede lograr descifrar un mensaje mediante el cálculo de la llave secreta en un tiempo de tan solo segundos.
+
+  \begin{table}[H]
+    \centering
+    \caption{Comparación de tecnologías PCI-E}
+    \input{\main/inc/tabla_tamano_clave}
+    \caption*{\textbf{Fuente:} \cite{web:tiempo_crack_aes}}
+  \end{table}
+
+  El algoritmo AES Rijndael trabaja con mensajes divididos en bloques de 128 bits y llaves de logitud de 128, 192 y 256 bits. Por lo tanto con una llave de 128 bits el atacante necesitaría generar: $2^{56} = 3.4 \times 10^{38}$ llaves, tarea que en la actualidad, aún con computadoras tan potentes, el trabajo tardaría millones de años.
+
+  Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 \times 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 x 24 x 60 x 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
+
+
+  \begin{equation}
+    \begin{aligned}
+    t &= \frac{3.4 \times 10^{38}}{143.5 \times 10^{15} x 31536000} \\
+    t &= \frac{23.69 \times 10^{15}}{315.36} \\
+    t &= 75.13 \times 10^{12} a\tilde{n}os
+    \end{aligned}
+  \end{equation}
+
+  Es decir, con la última tecnología disponible actualmente se tomaría un tiempo de 75.13 billones de años en generar las llaves secretas necesarias para descifrar un mensaje. Suponiendo que solo fuese necesario generar la mitad de las llaves para encontrar la correcta, el proceso tardaría mas de 32 billones de años. Por lo tanto una llave secreta de 128 bits utilizada para cifrar un mensaje con el algoritmo AES Rijndael es suficiente seguridad para la actualidad y para unos años más en el futuro.
+
+  \subsection{Etapas del cifrado AES Rijndael}
+
+
 
   \begin{figure}[H]
     \centering
@@ -121,23 +147,6 @@
     \input{\main/inc/cuadro_algoritmo_aes}
     \caption*{\textbf{Fuente:} Elaboración propia}
   \end{figure}
-
-  El algoritmo AES Rijndael trabaja con mensajes divididos en bloques de 128 bits y llaves de logitud de 128, 192 y 256 bits. Por lo tanto con una llave de 128 bits el atacante necesitaría generar: $2^{56} = 3.4 x 10^{38}$ llaves, tarea que en la actualidad, aún con computadoras tan potentes, el trabajo tardaría millones de años.
-
-  Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 x 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 x 24 x 60 x 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
-
-
-  \begin{equation}
-    \begin{aligned}
-    t &= \frac{3.4 x 10^{38}}{143.5 x 10^{15} x 31536000} \\
-    t &= \frac{23.69 x 10^{15}}{315.36} \\
-    t &= 75.13 x 10^{12} a\tilde{n}os
-    \end{aligned}
-  \end{equation}
-
-  Es decir, con última tecnología actual disponible se tardaría 75.13 billones de años en generar las llaves secretas necesarias para descifrar un mensaje. Suponiendo que solo fuese necesario generar la mitad de las llaves para encontrar la correcta, el proceso tardaría mas de 32 billones de años. Por lo tanto una llave secreta de 128 bits utilizada para cifrar un mensaje con el algoritmo AES Rijndael es suficiente seguridad para la actualidad y para unos años más.
-
-  
 
 
 \end{document}
