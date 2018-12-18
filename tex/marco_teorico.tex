@@ -76,7 +76,7 @@
 
   \subsection{Unidad de procesamiento gráfico (GPU)}
 
-  Esta unidad actúa como un co-procesador que se encarga de las operaciones matriciales o de coma flotante, por lo general los procesos gráficos de transformación o renderización son distribuidos a la o las GPUs desde el procesador central CPU.
+  Esta unidad actúa como un co-procesador que se encarga de las operaciones matriciales o de coma flotante, por lo general los procesos gráficos de transformación o renderización son distribuidos a la o las GPUs desde el procesador central o CPU.
 
   Dado el estudio generado sobre las plataformas GPU, los fabricantes pusieron a disposición de los usuarios herramientas de desarrollo para utilizar las GPU como ayuda en cálculos de álgebra dispersa, tensores en dinámica de fluidos, minería de datos, inteligencia artificial, deep learning, etc, con lo cual la denominación de las GPU abiertas a otro tipo de uso más que el simple uso gráfico cambió a GPGPU\footnote{Unidad de Procesamiento Gráfico de Uso General (General Purpose Graphics Processing Unit)}.
 
@@ -89,13 +89,55 @@
     \caption*{\textbf{Fuente:} \cite{web:gpgpu}}
   \end{figure}
 
+  El obstáculo principal para el desarrollo de aplicaciones orientadas hacia la GPU es que las arquitecturas de las tarjetas gráficas son demasiado variables, a pesar de la existencia de librerías o APIs genéricas como OpenGL, muchas funcionalidades dentro de los métodos o clases son variables entre fabricantes e incluso entre modelos de dispositivos de un mismo fabricante. Las librerías genéricas utilizan un núcleo basado en el esquema de Conductos de Renderización\footnote{Rendering Pipeline}, con los que se pueden tratar vectores, mapas de bits y elementos definidos pixel-pixel.
+
+  Otro factor importante que impide hacer un uso adecuado de estos dispositivos es el límite físico con el que actualmente cuenta la conexión de memoria RAM de la GPU con el bus de la CPU para la transferencia de datos. Al cuarto trimestre de 2018 ya se cuenta con la tecnología GDDR6\footnote{Tasa Doble de transferencia de Datos  (Double Data Rate)} que ofrece un ancho de banda de hasta 16Gbps frente a los 10Gbps de su predecesor GDDR5X, cabe mencionar que se lograron estos anchos de banda gracias al cambio de modo half-duplex o transferencia en ambos sentidos pero solo uno a la vez, por el modo full-duplex que transfiere los datos en ambos sentidos al mismo tiempo.
+
+  \begin{figure}[H]
+    \centering
+    \caption{Comparación de tecnologías GDDR6 vs GDDR5}
+    \includegraphics[width=12cm, keepaspectratio]{marco_teorico/comparacion_gddr.png}
+    \caption*{\textbf{Fuente:} \cite{web:comparacion_gddr}}
+  \end{figure}
+
+  Pero AMD ya se encuentra desarrollando tarjetas madres con conectores PCI-E\footnote{Componente Periférico de Interconexión Expresa (Peripheral Component Interconnect Express)} 5.0 que incrementarán la velocidad de transferencia hasta los 32Gbps que conjuntamente con el almacenamiento SSD\footnote{Solid State Drive} lograrán impulsar el desarrollo de aplicaciones de uso general en las GPUs.
+
+  \begin{table}[H]
+    \centering
+    \caption{Comparación de tecnologías PCI-E}
+    \input{\main/inc/tabla_comparativa_pcie}
+    \caption*{\textbf{Fuente:} \cite{web:comparacion_pcie}}
+  \end{table}
+
+  \section{AES}
+
+  El Estándar de Encriptación Avanzada fue de desarrollado mediante un concurso en 1997, por los criptógrafos Vincent Rijmen e Joan Daemen en el año 2001, como la sustitución al algoritmo DES\footnote{Estándar de Encriptación de Datos(Data Encryption Standard)} que había sido crackeado mediante la máquina DES Cracker construida por la ONG Electronic Frontier Foundation, con una inversión de 250 mil dólares. Este estándar fue aprobado y es utilizado por entes reguladores como la NSA\footnote{Agencia de Seguridad Nacional(National Security Agency)} y se estandariza mediante la norma ISO/IEC 18033 [\cite{standard:iso_18033}].
+
+  El algoritmo AES Rijndael es un algoritmo de llave simétrica, lo cual indica que se utiliza una misma llave para cifrar y descifrar los mensajes en el lado del emisor y del receptor. Por tal razón, toda la seguridad recae en proteger la clave secreta, por tal razón el abanico de claves posibles debe ser de una cantidad tan grande que el intruso deba realizar pruebas, por inclusive años, para poder descifrar el mensaje. Para el caso de DES, la clave es de 56 bits por lo que la cantidad de claves será igual a: $2^{56} = 7.2 x 10^{16}$ posibles claves; un computador actual puede lograr descifrar un mensaje mediante el cálculo de la llave secreta en un tiempo de tan solo segundos.
+
+  \begin{figure}[H]
+    \centering
+    \caption{Algoritmo AES Rijndael}
+    \input{\main/inc/cuadro_algoritmo_aes}
+    \caption*{\textbf{Fuente:} Elaboración propia}
+  \end{figure}
+
+  El algoritmo AES Rijndael trabaja con mensajes divididos en bloques de 128 bits y llaves de logitud de 128, 192 y 256 bits. Por lo tanto con una llave de 128 bits el atacante necesitaría generar: $2^{56} = 3.4 x 10^{38}$ llaves, tarea que en la actualidad, aún con computadoras tan potentes, el trabajo tardaría millones de años.
+
+  Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 x 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 x 24 x 60 x 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
 
 
+  \begin{equation}
+    \begin{aligned}
+    t &= \frac{3.4 x 10^{38}}{143.5 x 10^{15} x 31536000} \\
+    t &= \frac{23.69 x 10^{15}}{315.36} \\
+    t &= 75.13 x 10^{12} a\tilde{n}os
+    \end{aligned}
+  \end{equation}
 
+  Es decir, con última tecnología actual disponible se tardaría 75.13 billones de años en generar las llaves secretas necesarias para descifrar un mensaje. Suponiendo que solo fuese necesario generar la mitad de las llaves para encontrar la correcta, el proceso tardaría mas de 32 billones de años. Por lo tanto una llave secreta de 128 bits utilizada para cifrar un mensaje con el algoritmo AES Rijndael es suficiente seguridad para la actualidad y para unos años más.
 
-
-
-
+  
 
 
 \end{document}

@@ -22,7 +22,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel} %------- Entorno de latex en español -------%
 \usepackage[utf8]{inputenc} %------- Acentos nativos -------%
-\linespread{1.5} %------- Doble espacio interlineado -------%
+\usepackage{setspace} %------- Doble espacio interlineado -------%
+\onehalfspacing
 %------- Tamaño de hoja y márgenes -------%
 \usepackage{geometry}
 \geometry{
@@ -245,10 +246,12 @@
 \renewcommand\tiny{\@setfontsize\tiny{5}{6}}
 \renewcommand\scriptsize{\@setfontsize\scriptsize{7}{8}}
 \renewcommand\small{\@setfontsize\small{10}{12}}
-\renewcommand\normalsize{\@setfontsize\normalsize{12}{14}}
+\renewcommand\normalsize{\@setfontsize\normalsize{12}{18}}
 \renewcommand\large{\@setfontsize\large{13}{15}}
 \renewcommand\Large{\@setfontsize\Large{14}{16}}
 \renewcommand\LARGE{\@setfontsize\LARGE{18}{21.5}}
 \renewcommand\huge{\@setfontsize\huge{20}{30}}
 \renewcommand\Huge{\@setfontsize\Huge{24}{36}}
 \makeatother
+
+\usepackage{mathtools}
