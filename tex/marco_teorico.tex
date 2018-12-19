@@ -61,7 +61,7 @@
   \begin{figure}[H]
     \centering
     \caption{Clúster de alto rendimiento}
-    \includegraphics[width=10cm, keepaspectratio]{marco_teorico/cluster_alto_rendimiento.jpg}
+    \includegraphics[width=8cm, keepaspectratio]{marco_teorico/cluster_alto_rendimiento.jpg}
     \caption*{\textbf{Fuente:} \cite[p.~2]{article:cluster_alto_rendimiento}}
   \end{figure}
 
@@ -137,9 +137,46 @@
 
   Es decir, con la última tecnología disponible actualmente se tomaría un tiempo de 75.13 billones de años en generar las llaves secretas necesarias para descifrar un mensaje. Suponiendo que solo fuese necesario generar la mitad de las llaves para encontrar la correcta, el proceso tardaría mas de 32 billones de años. Por lo tanto una llave secreta de 128 bits utilizada para cifrar un mensaje con el algoritmo AES Rijndael es suficiente seguridad para la actualidad y para unos años más en el futuro.
 
-  \subsection{Etapas del cifrado AES Rijndael}
+  \subsection{Estructura del algoritmo}
 
+  Este algoritmo es conformado por rondas en las que se ejecutan 4 funciones matemáticas en un orden establecido. El resultado de cada ronda es llamado \textit{Estado} que es una matriz de 4 filas por $N_b$ columnas, donde:
 
+  \begin{equation}
+    N_b = \frac{Tama\tilde{n}o\ de\ bloque\ utilizado\ en\ bits}{32}
+  \end{equation}
+
+  De manera similar, la clave inicial se representa mediante una matriz de 4 filas y $N_k$ columnas, donde:
+
+  \begin{equation}
+    N_k = \frac{Tama\tilde{n}o\ de\ la\ clave\ en\ bits}{32}
+  \end{equation}
+  
+  Las matrices se acomodan de tal forma que cada palabra (4 bytes = 32 bits) es representada en una columna de izquierda a derecha.
+
+  Por ejemplo la frase: ``mensaje secreto.'' se convierte de ASCII a su representación hexadecimal, cuyo resultado es:
+
+  \begin{center}
+    6d 65 6e 73 61 6a 65 20 73 65 63 72 65 74 6f 2e
+  \end{center}
+
+  Que se acomoda en una matriz de estado como se muestra a continuación:
+
+  \begin{table}[H]
+    \centering
+    \input{\main/inc/matriz_estado_ejemplo}
+  \end{table}
+
+  Cabe recalcar que el mensaje es de una longitud de 128 bits; en caso de no ser así, el mensaje es dividido en paquetes de 128 bits y se acomoda un relleno o padding de acuerdo a la norma PKCS\#7 en el caso de AES Rijndael.
+
+  De forma análoga, se realiza el mismo proceso para la clave secreta inicial que puede ser de 128, 192 o 256 bits. El número de rondas para llegar a calcular el criptograma varía de acuerdo al tamaño de la clave:
+
+  \begin{itemize}[noitemsep,nolistsep]
+    \item Para una clave de cifrado de 128 bits el algoritmo realiza 10 rondas
+    \item Para una clave de cifrado de 192 bits el algoritmo realiza 12 rondas
+    \item Para una clave de cifrado de 256 bits el algoritmo realiza 14 ronda
+  \end{itemize}
+  
+  El proceso continúa con la generación de sub-claves para posteriormente pasar a utilizar cada sub-clave en su ronda específica.
 
   \begin{figure}[H]
     \centering
@@ -147,6 +184,55 @@
     \input{\main/inc/cuadro_algoritmo_aes}
     \caption*{\textbf{Fuente:} Elaboración propia}
   \end{figure}
+
+  Donde:
+
+  \begin{description}[noitemsep,nolistsep]
+    \item[N:] Número de rondas
+    \item[i:] Ronda actual
+    \item[$N_a$:] Enésima ronda
+  \end{description}
+
+  El número de sub-claves a calcular es igual a N, ya que la primera operación a realizar es siempre un OR exclusivo entre la clave inicial y la primera matriz de estado, en este caso del texto en claro acomodado en la matriz de dimensión 4x4.
+  
+  El proceso de descifrado es el mismo pero en orden contrario:
+
+  \begin{figure}[H]
+    \centering
+    \caption{Algoritmo AES Rijndael}
+    \input{\main/inc/cuadro_algoritmo_aes_inverso}
+    \caption*{\textbf{Fuente:} Elaboración propia}
+  \end{figure}
+
+  \subsubsection{Expansión de clave}
+
+  Se toma la clave inicial como la primera sub-clave $K_0$, por ejemplo:
+
+  \begin{center}
+    63 6C 61 76 65 20 64 65 20 31 32 38 62 69 74 73
+  \end{center}
+
+  \begin{enumerate}[label=\textbf{\arabic*}.]
+    \item \textbf{RotWord} \\
+      Se selecciona la última columna o palabra de la sub-clave y se rota el byte superior de manera vertical.
+
+      \begin{table}[H]
+        \centering
+        \input{\main/inc/matriz_clave_inicial_ejemplo}
+      \end{table}
+      
+
+
+
+
+  \end{enumerate}
+
+  
+
+
+
+
+  
 
 
 \end{document}
