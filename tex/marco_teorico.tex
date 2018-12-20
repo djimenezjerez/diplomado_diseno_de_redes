@@ -220,19 +220,32 @@
         \centering
         \input{\main/inc/matriz_clave_inicial_ejemplo}
       \end{table}
+
+    \item \textbf{SubBytes} \\
+      Se sustituyen los valores de acuerdo a la tabla de sustitución S-Box de Rijndael.
+
+      \begin{table}[H]
+        \centering
+        \input{\main/inc/matriz_sbox_rijndael_ejemplo}
+      \end{table}
+
+    \item \textbf{XOR [i-3]} \\
+      Se realiza la operación de OR exclusivo con la columna que se encuentra 3 posiciones atrás en la matriz de estado de la sub-clave.
+
+      \begin{table}[H]
+        \centering
+        \input{\main/inc/matriz_xor_i_3}
+      \end{table}
+
       
-
-
-
-
   \end{enumerate}
 
-  
 
 
 
 
-  
+
+
 
 
 \end{document}
