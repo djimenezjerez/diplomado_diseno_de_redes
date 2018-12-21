@@ -198,7 +198,7 @@
         Es la sustitución byte a byte de la matriz de estado mediante la tabla S-Box que se construye mediante dos transformaciones consecutivas. Cada byte se considera un elemento del Campo de Galois $GF(2^8$) de cuerpos finitos; esto quiere decir que para cada valor existe un inverso aditivo y multiplicativo que elimina los problemas de redondeo y desbordamiento. Cabe mencionar que en la matemática modular se trabaja únicamente con números primos. Por tanto cada byte genera un polinomio irreducible $m(x) = x^8 + x^4 + x^3 + x + 1$, que es sustituido por su inverso multiplicativo. Una vez realizada la primera transformación se aplica la transformación afín en GF(2):
 
         \input{\main/inc/matriz_gf2}
-        
+
         De acuerdo a esta lógica se calcula la tabla S-Box para cada valor de los 256 que pueden componer un byte (8 bits).
 
         \begin{table}[H]
@@ -209,11 +209,16 @@
           \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
         \end{table}
 
+        Por ejemplo la transformación SubBytes sobre el hexadecimal A2:
+
+        \begin{center}
+          $SubBytes(A2) = 3A$
+        \end{center}
+
       \item \textbf{ShiftRows} \\
         En esta transformación se rotan hacia la izquierda las filas de la matriz de estado de manera incremental; es decir, la primera fila no rota, la segunda rota 1 vez, la tercera 2 veces y la cuarta 3 veces. El número de rotaciones se mantiene constante para la matriz de estado conformada por el mensaje pero varía para la clave ya que esta puede ser de 128, 192 o 256 bits como se mencionó anteriormente, para ello se aplica la siguiente regla, tomando $C_0$ como la primera fila de la matriz de estado, $C_1$ como la segunda, $C_2$ como la tercera u $C_3$ como la cuarta, se mantiene $C_0$ sin rotar, las demás filas rotan de acuerdo a la tabla \ref{tabla_rotaciones_estado}.
 
         \begin{table}[H]
-          \scriptsize
           \centering
           \caption{Rotaciones de las filas de la matriz de estado}
           \input{\main/inc/tabla_rotacion_estado}
@@ -224,7 +229,6 @@
         Un ejemplo gráfico de la rotación de la matriz de estado se puede observar en la table \ref{tabla_shiftrows}.
 
         \begin{table}[H]
-          \scriptsize
           \centering
           \caption{ShiftRows}
           \input{\main/inc/tabla_shiftrows}
@@ -232,8 +236,29 @@
           \label{tabla_shiftrows}
         \end{table}
 
-      \item \textbf{MixColumns} \\
+        Como ejemplo, a continuación se realiza la transformación ShiftRows sobre una matriz de estado:
 
+        \begin{table}[H]
+          \centering
+          \input{\main/inc/tabla_ejemplo_shiftrows}
+        \end{table}
+
+      \item \textbf{MixColumns} \\
+        En esta transformación se considera a las columnas de la matriz de estado como polinomios con coeficientes pertenecientes al Campo de Galois GF($2^8$); es decir, estos son también polinomios. La transformación se la realiza multiplicando cada columna de la matriz de estado en módulo $x^4 + 1$ por el polinomio irreducible de Rijndael $m(x) = x^8 + x^4 + x^3 + x + 1$.
+
+        \begin{table}[H]
+          \centering
+          \caption{Polinomio irreducible de Rijndael}
+          \input{\main/inc/matrix_polinomio_rijndael}
+          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+        \end{table}
+
+        Por ejemplo la aplicación de la transformación MixColumns sobre la primera columna de la matriz de estado calculada en el paso anterior llega a ser:
+
+        \input{\main/inc/matriz_ejemplo_mixcolumns}
+
+      \item \textbf{AddRoundKey} \\
+        
 
 
 
