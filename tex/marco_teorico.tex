@@ -175,23 +175,84 @@
     \item Para una clave de cifrado de 192 bits el algoritmo realiza 12 rondas
     \item Para una clave de cifrado de 256 bits el algoritmo realiza 14 ronda
   \end{itemize}
-  
-  El proceso continúa con la generación de sub-claves para posteriormente pasar a utilizar cada sub-clave en su ronda específica.
 
-  \begin{figure}[H]
-    \centering
-    \caption{Algoritmo AES Rijndael}
-    \input{\main/inc/cuadro_algoritmo_aes}
-    \caption*{\textbf{Fuente:} Elaboración propia}
-  \end{figure}
+  \subsubsection{Operaciones para el proceso de cifrado}
 
-  Donde:
+    \begin{figure}[H]
+      \centering
+      \caption{Algoritmo AES Rijndael}
+      \input{\main/inc/cuadro_algoritmo_aes}
+      \caption*{\textbf{Fuente:} Elaboración propia}
+    \end{figure}
 
-  \begin{description}[noitemsep,nolistsep]
-    \item[N:] Número de rondas
-    \item[i:] Ronda actual
-    \item[$N_a$:] Enésima ronda
-  \end{description}
+    Donde:
+
+    \begin{description}[noitemsep,nolistsep]
+      \item[N:] Número de rondas
+      \item[i:] Ronda actual
+      \item[$N_a$:] Enésima ronda
+    \end{description}
+
+    \begin{enumerate}[label=\textbf{\arabic*}.]
+      \item \textbf{SubBytes} \\
+        Es la sustitución byte a byte de la matriz de estado mediante la tabla S-Box que se construye mediante dos transformaciones consecutivas. Cada byte se considera un elemento del Campo de Galois $GF(2^8$) de cuerpos finitos; esto quiere decir que para cada valor existe un inverso aditivo y multiplicativo que elimina los problemas de redondeo y desbordamiento. Cabe mencionar que en la matemática modular se trabaja únicamente con números primos. Por tanto cada byte genera un polinomio irreducible $m(x) = x^8 + x^4 + x^3 + x + 1$, que es sustituido por su inverso multiplicativo. Una vez realizada la primera transformación se aplica la transformación afín en GF(2):
+
+        \input{\main/inc/matriz_gf2}
+        
+        De acuerdo a esta lógica se calcula la tabla S-Box para cada valor de los 256 que pueden componer un byte (8 bits).
+
+        \begin{table}[H]
+          \scriptsize
+          \centering
+          \caption{Tabla S-Box}
+          \input{\main/inc/tabla_s_box}
+          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+        \end{table}
+
+      \item \textbf{ShiftRows} \\
+        En esta transformación se rotan hacia la izquierda las filas de la matriz de estado de manera incremental; es decir, la primera fila no rota, la segunda rota 1 vez, la tercera 2 veces y la cuarta 3 veces. El número de rotaciones se mantiene constante para la matriz de estado conformada por el mensaje pero varía para la clave ya que esta puede ser de 128, 192 o 256 bits como se mencionó anteriormente, para ello se aplica la siguiente regla, tomando $C_0$ como la primera fila de la matriz de estado, $C_1$ como la segunda, $C_2$ como la tercera u $C_3$ como la cuarta, se mantiene $C_0$ sin rotar, las demás filas rotan de acuerdo a la tabla \ref{tabla_rotaciones_estado}.
+
+        \begin{table}[H]
+          \scriptsize
+          \centering
+          \caption{Rotaciones de las filas de la matriz de estado}
+          \input{\main/inc/tabla_rotacion_estado}
+          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+          \label{tabla_rotaciones_estado}
+        \end{table}
+
+        Un ejemplo gráfico de la rotación de la matriz de estado se puede observar en la table \ref{tabla_shiftrows}.
+
+        \begin{table}[H]
+          \scriptsize
+          \centering
+          \caption{ShiftRows}
+          \input{\main/inc/tabla_shiftrows}
+          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+          \label{tabla_shiftrows}
+        \end{table}
+
+      \item \textbf{MixColumns} \\
+
+
+
+
+
+
+    \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   El número de sub-claves a calcular es igual a N, ya que la primera operación a realizar es siempre un OR exclusivo entre la clave inicial y la primera matriz de estado, en este caso del texto en claro acomodado en la matriz de dimensión 4x4.
   

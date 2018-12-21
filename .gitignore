@@ -31,4 +31,3 @@
 *.bcf
 *.run.xml
 .vscode/
-!main/main.pdf
