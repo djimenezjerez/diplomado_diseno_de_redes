@@ -153,15 +153,18 @@
 %------ Formato para código fuente ------%
 \usepackage{listings}
 \lstset{
-  language=C++,
-  frame=tb,
-  tabsize=2,
-  showstringspaces=false,
-  numbers=left,
+  language=Python,
+  basicstyle=\scriptsize\ttfamily,
+  otherkeywords={self},
+  emph={MyClass,__init__},
+  emphstyle=\ttb\color{gray},
   commentstyle=\color{green},
   keywordstyle=\color{blue},
   stringstyle=\color{red},
-  basicstyle=\footnotesize\ttfamily,
+  frame=tb,
+  showstringspaces=false
+  tabsize=2,
+  numbers=left,
   basewidth={.48em},
   lineskip={-0.1em},
   breaklines=true,

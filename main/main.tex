@@ -76,4 +76,10 @@
   \nocite{*} %------- Eliminar formato por defecto de bibliografía -------%
   \printbibliography
 
+  \setcounter{section}{0} %------- Reiniciar numeración de secciones -------%
+  \renewcommand{\thesection}{Anexo \arabic{section}}
+  \chapter*{Anexos}
+  \addcontentsline{toc}{chapter}{Anexos}
+  \subfile{../tex/anexos.tex}
+
 \end{document}

@@ -2,9 +2,7 @@
 
 \begin{document}
 \espacio
-
-  %------------ TODO ------------%
-  En este capítulo se muestra el marco teórico TODO.
+  En este capítulo se muestran los conceptos referentes a computación paralela en CPU y GPU, definición y estructura del algoritmo AES Rijndael, operaciones utilizadas para el cifrado y descifrado, muestras y resultados obtenidos de la ejecución del algoritmo AES Rijndael en CPU y GPU.
 
   \section{Antecedentes}
 
@@ -126,7 +124,6 @@
 
   Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 \times 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 x 24 x 60 x 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
 
-
   \begin{equation}
     \begin{aligned}
     t &= \frac{3.4 \times 10^{38}}{143.5 \times 10^{15} x 31536000} \\
@@ -137,194 +134,277 @@
 
   Es decir, con la última tecnología disponible actualmente se tomaría un tiempo de 75.13 billones de años en generar las llaves secretas necesarias para descifrar un mensaje. Suponiendo que solo fuese necesario generar la mitad de las llaves para encontrar la correcta, el proceso tardaría mas de 32 billones de años. Por lo tanto una llave secreta de 128 bits utilizada para cifrar un mensaje con el algoritmo AES Rijndael es suficiente seguridad para la actualidad y para unos años más en el futuro.
 
-  \subsection{Estructura del algoritmo}
-
-  Este algoritmo es conformado por rondas en las que se ejecutan 4 funciones matemáticas en un orden establecido. El resultado de cada ronda es llamado \textit{Estado} que es una matriz de 4 filas por $N_b$ columnas, donde:
-
-  \begin{equation}
-    N_b = \frac{Tama\tilde{n}o\ de\ bloque\ utilizado\ en\ bits}{32}
-  \end{equation}
-
-  De manera similar, la clave inicial se representa mediante una matriz de 4 filas y $N_k$ columnas, donde:
-
-  \begin{equation}
-    N_k = \frac{Tama\tilde{n}o\ de\ la\ clave\ en\ bits}{32}
-  \end{equation}
-  
-  Las matrices se acomodan de tal forma que cada palabra (4 bytes = 32 bits) es representada en una columna de izquierda a derecha.
-
-  Por ejemplo la frase: ``mensaje secreto.'' se convierte de ASCII a su representación hexadecimal, cuyo resultado es:
-
-  \begin{center}
-    6d 65 6e 73 61 6a 65 20 73 65 63 72 65 74 6f 2e
-  \end{center}
-
-  Que se acomoda en una matriz de estado como se muestra a continuación:
-
-  \begin{table}[H]
-    \centering
-    \input{\main/inc/matriz_estado_ejemplo}
-  \end{table}
-
-  Cabe recalcar que el mensaje es de una longitud de 128 bits; en caso de no ser así, el mensaje es dividido en paquetes de 128 bits y se acomoda un relleno o padding de acuerdo a la norma PKCS\#7 en el caso de AES Rijndael.
-
-  De forma análoga, se realiza el mismo proceso para la clave secreta inicial que puede ser de 128, 192 o 256 bits. El número de rondas para llegar a calcular el criptograma varía de acuerdo al tamaño de la clave:
+  Este algoritmo fue seleccionado ganador de entre muchos otros participantes del concurso de 1997 considerando sus tres axiomas importantes:
 
   \begin{itemize}[noitemsep,nolistsep]
-    \item Para una clave de cifrado de 128 bits el algoritmo realiza 10 rondas
-    \item Para una clave de cifrado de 192 bits el algoritmo realiza 12 rondas
-    \item Para una clave de cifrado de 256 bits el algoritmo realiza 14 ronda
+    \item Resistencia contra todos los ataques conocidos hasta la fecha.
+    \item Compatibilidad con un gran número de plataformas de hardware.
+    \item Velocidad y sencillez en el diseño.
   \end{itemize}
 
-  \subsubsection{Operaciones para el proceso de cifrado}
+  \subsection{Estructura del algoritmo}
+
+    Los cifradores simétricos están desarrollados con una estructura de tipo Feistel, esta estructura tiene dos partes, la izquierda y la derecha.
 
     \begin{figure}[H]
       \centering
-      \caption{Algoritmo AES Rijndael}
-      \input{\main/inc/cuadro_algoritmo_aes}
-      \caption*{\textbf{Fuente:} Elaboración propia}
+      \caption{Bloque de información H para el modelo de cifrador Feistel}
+      \input{\main/inc/cuadro_cifrador_feistel}
+      \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
     \end{figure}
 
-    Donde:
+    La diferencia es que Rijndael define las vueltas de transformaciones en tres funciones invertibles llamadas capas:
 
-    \begin{description}[noitemsep,nolistsep]
-      \item[N:] Número de rondas
-      \item[i:] Ronda actual
-      \item[$N_a$:] Enésima ronda
-    \end{description}
+    \begin{itemize}[noitemsep,nolistsep]
+      \item La mezcla lineal garantiza alta difusión de la información dado el número de vueltas.
+      \item La capa no lineal hace que el comportamiento del sistema no pueda ser representado como la suma de los comportamientos de sus sub-sistemas.
+      \item La capa de adición de clave crea estados intermedios para hacer difusa la matriz de estado.
+    \end{itemize}
 
-    \begin{enumerate}[label=\textbf{\arabic*}.]
-      \item \textbf{SubBytes} \\
-        Es la sustitución byte a byte de la matriz de estado mediante la tabla S-Box que se construye mediante dos transformaciones consecutivas. Cada byte se considera un elemento del Campo de Galois $GF(2^8$) de cuerpos finitos; esto quiere decir que para cada valor existe un inverso aditivo y multiplicativo que elimina los problemas de redondeo y desbordamiento. Cabe mencionar que en la matemática modular se trabaja únicamente con números primos. Por tanto cada byte genera un polinomio irreducible $m(x) = x^8 + x^4 + x^3 + x + 1$, que es sustituido por su inverso multiplicativo. Una vez realizada la primera transformación se aplica la transformación afín en GF(2):
+    Este algoritmo es conformado por rondas en las que se ejecutan 4 funciones matemáticas en un orden establecido. El resultado de cada ronda es llamado \textit{Estado} que es una matriz de 4 filas por $N_b$ columnas, donde:
 
-        \input{\main/inc/matriz_gf2}
+    \begin{equation}
+      N_b = \frac{Tama\tilde{n}o\ de\ bloque\ utilizado\ en\ bits}{32}
+    \end{equation}
 
-        De acuerdo a esta lógica se calcula la tabla S-Box para cada valor de los 256 que pueden componer un byte (8 bits).
+    De manera similar, la clave inicial se representa mediante una matriz de 4 filas y $N_k$ columnas, donde:
 
-        \begin{table}[H]
-          \scriptsize
-          \centering
-          \caption{Tabla S-Box}
-          \input{\main/inc/tabla_s_box}
-          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
-        \end{table}
+    \begin{equation}
+      N_k = \frac{Tama\tilde{n}o\ de\ la\ clave\ en\ bits}{32}
+    \end{equation}
+    
+    Las matrices se acomodan de tal forma que cada palabra (4 bytes = 32 bits) es representada en una columna de izquierda a derecha.
 
-        Por ejemplo la transformación SubBytes sobre el hexadecimal A2:
+    Por ejemplo la frase: ``mensaje secreto.'' se convierte de ASCII a su representación hexadecimal, cuyo resultado es:
 
-        \begin{center}
-          $SubBytes(A2) = 3A$
-        \end{center}
+    \begin{center}
+      6d 65 6e 73 61 6a 65 20 73 65 63 72 65 74 6f 2e
+    \end{center}
 
-      \item \textbf{ShiftRows} \\
-        En esta transformación se rotan hacia la izquierda las filas de la matriz de estado de manera incremental; es decir, la primera fila no rota, la segunda rota 1 vez, la tercera 2 veces y la cuarta 3 veces. El número de rotaciones se mantiene constante para la matriz de estado conformada por el mensaje pero varía para la clave ya que esta puede ser de 128, 192 o 256 bits como se mencionó anteriormente, para ello se aplica la siguiente regla, tomando $C_0$ como la primera fila de la matriz de estado, $C_1$ como la segunda, $C_2$ como la tercera u $C_3$ como la cuarta, se mantiene $C_0$ sin rotar, las demás filas rotan de acuerdo a la tabla \ref{tabla_rotaciones_estado}.
+    Que se acomoda en una matriz de estado como se muestra a continuación:
 
-        \begin{table}[H]
-          \centering
-          \caption{Rotaciones de las filas de la matriz de estado}
-          \input{\main/inc/tabla_rotacion_estado}
-          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
-          \label{tabla_rotaciones_estado}
-        \end{table}
+    \begin{table}[H]
+      \centering
+      \input{\main/inc/matriz_estado_ejemplo}
+    \end{table}
 
-        Un ejemplo gráfico de la rotación de la matriz de estado se puede observar en la table \ref{tabla_shiftrows}.
+    Cabe recalcar que el mensaje es de una longitud de 128 bits; en caso de no ser así, el mensaje es dividido en paquetes de 128 bits y se acomoda un relleno o padding de acuerdo a la norma PKCS\#7 en el caso de AES Rijndael.
 
-        \begin{table}[H]
-          \centering
-          \caption{ShiftRows}
-          \input{\main/inc/tabla_shiftrows}
-          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
-          \label{tabla_shiftrows}
-        \end{table}
+    De forma análoga, se realiza el mismo proceso para la clave secreta inicial que puede ser de 128, 192 o 256 bits. El número de rondas para llegar a calcular el criptograma varía de acuerdo al tamaño de la clave:
 
-        Como ejemplo, a continuación se realiza la transformación ShiftRows sobre una matriz de estado:
+    \begin{itemize}[noitemsep,nolistsep]
+      \item Para una clave de cifrado de 128 bits el algoritmo realiza 10 rondas
+      \item Para una clave de cifrado de 192 bits el algoritmo realiza 12 rondas
+      \item Para una clave de cifrado de 256 bits el algoritmo realiza 14 ronda
+    \end{itemize}
 
-        \begin{table}[H]
-          \centering
-          \input{\main/inc/tabla_ejemplo_shiftrows}
-        \end{table}
+    \subsubsection{Operaciones para el proceso de cifrado}
 
-      \item \textbf{MixColumns} \\
-        En esta transformación se considera a las columnas de la matriz de estado como polinomios con coeficientes pertenecientes al Campo de Galois GF($2^8$); es decir, estos son también polinomios. La transformación se la realiza multiplicando cada columna de la matriz de estado en módulo $x^4 + 1$ por el polinomio irreducible de Rijndael $m(x) = x^8 + x^4 + x^3 + x + 1$.
+      \begin{figure}[H]
+        \centering
+        \caption{Algoritmo AES Rijndael}
+        \input{\main/inc/cuadro_algoritmo_aes}
+        \caption*{\textbf{Fuente:} Elaboración propia}
+      \end{figure}
 
-        \begin{table}[H]
-          \centering
-          \caption{Polinomio irreducible de Rijndael}
-          \input{\main/inc/matrix_polinomio_rijndael}
-          \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
-        \end{table}
+      Donde:
 
-        Por ejemplo la aplicación de la transformación MixColumns sobre la primera columna de la matriz de estado calculada en el paso anterior llega a ser:
+      \begin{description}[noitemsep,nolistsep]
+        \item[N:] Número de rondas
+        \item[i:] Ronda actual
+        \item[$N_a$:] Enésima ronda
+      \end{description}
 
-        \input{\main/inc/matriz_ejemplo_mixcolumns}
+      \begin{enumerate}[label=\textbf{\arabic*}.]
+        \item \textbf{SubBytes} \\
+          Aporta la propiedad de no linealidad, lo que evita ataques de interpolación, criptoanálisis diferencial y criptoanálisis lineal.
 
-      \item \textbf{AddRoundKey} \\
+          Las propiedades de esta operación son:
+
+          \begin{itemize}[noitemsep,nolistsep]
+            \item Es invertible.
+            \item Minimiza la relación lineal entre la entrada y la salida.
+            \item Incrementa la complejidad por sus expresiones en el Campo de Galois en GF($2^8$).
+            \item Sencillez de diseño.
+          \end{itemize}
+
+          Es la sustitución byte a byte de la matriz de estado mediante la tabla S-Box que se construye mediante dos transformaciones consecutivas. Cada byte se considera un elemento del Campo de Galois $GF(2^8$) de cuerpos finitos; esto quiere decir que para cada valor existe un inverso aditivo y multiplicativo que elimina los problemas de redondeo y desbordamiento. Cabe mencionar que en la matemática modular se trabaja únicamente con números primos. Por tanto cada byte genera un polinomio irreducible $m(x) = x^8 + x^4 + x^3 + x + 1$, que es sustituido por su inverso multiplicativo. Una vez realizada la primera transformación se aplica la transformación afín en GF(2):
+
+          \input{\main/inc/matriz_gf2}
+
+          De acuerdo a esta lógica se calcula la tabla S-Box para cada valor de los 256 que pueden componer un byte (8 bits).
+
+          \begin{table}[H]
+            \scriptsize
+            \centering
+            \caption{Tabla S-Box}
+            \input{\main/inc/tabla_s_box}
+            \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+          \end{table}
+
+          Por ejemplo la transformación SubBytes sobre el hexadecimal A2:
+
+          \begin{center}
+            $SubBytes(A2) = 3A$
+          \end{center}
+
+        \item \textbf{ShiftRows} \\
+          En esta transformación se rotan hacia la izquierda las filas de la matriz de estado de manera incremental; es decir, la primera fila no rota, la segunda rota 1 vez, la tercera 2 veces y la cuarta 3 veces. El número de rotaciones se mantiene constante para la matriz de estado conformada por el mensaje pero varía para la clave ya que esta puede ser de 128, 192 o 256 bits como se mencionó anteriormente, para ello se aplica la siguiente regla, tomando $C_0$ como la primera fila de la matriz de estado, $C_1$ como la segunda, $C_2$ como la tercera u $C_3$ como la cuarta, se mantiene $C_0$ sin rotar, las demás filas rotan de acuerdo a la tabla \ref{tabla_rotaciones_estado}.
+
+          \begin{table}[H]
+            \centering
+            \caption{Rotaciones de las filas de la matriz de estado}
+            \input{\main/inc/tabla_rotacion_estado}
+            \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+            \label{tabla_rotaciones_estado}
+          \end{table}
+
+          Los números de rotaciones fueron elegidos con la finalidad de evitar los ataques de truncated differentials y de square.
+
+          Un ejemplo gráfico de la rotación de la matriz de estado se puede observar en la table \ref{tabla_shiftrows}.
+
+          \begin{table}[H]
+            \centering
+            \caption{ShiftRows}
+            \input{\main/inc/tabla_shiftrows}
+            \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+            \label{tabla_shiftrows}
+          \end{table}
+
+          Como ejemplo, a continuación se realiza la transformación ShiftRows sobre una matriz de estado:
+
+          \begin{table}[H]
+            \centering
+            \input{\main/inc/tabla_ejemplo_shiftrows}
+          \end{table}
+
+        \item \textbf{MixColumns} \\
+          Esta operación cuenta con las siguientes propiedades:
+
+          \begin{itemize}[noitemsep,nolistsep]
+            \item Es invertible.
+            \item Es lineal en el Campo de Galois GF(2).
+            \item Incluye un grado de difusión en la matriz de estado.
+            \item Compatibilidad y velocidad con procesadores de 8 bits.
+            \item Sencillez de diseño.
+          \end{itemize}
+
+          En esta transformación se considera a las columnas de la matriz de estado como polinomios con coeficientes pertenecientes al Campo de Galois GF($2^8$); es decir, estos son también polinomios. La transformación se la realiza multiplicando cada columna de la matriz de estado en módulo $x^4 + 1$ por el polinomio irreducible de Rijndael $m(x) = x^8 + x^4 + x^3 + x + 1$.
+
+          \begin{table}[H]
+            \centering
+            \caption{Polinomio irreducible de Rijndael}
+            \input{\main/inc/matriz_polinomio_rijndael}
+            \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+          \end{table}
+
+          Por ejemplo la aplicación de la transformación MixColumns sobre la primera columna de la matriz de estado calculada en el paso anterior llega a ser:
+
+          \input{\main/inc/matriz_ejemplo_mixcolumns}
+
+        \item \textbf{AddRoundKey} \\
+          Esta transformación consiste en realizar la operación XOR u OR-Exclusivo entre la matriz de estado y la sub-clave de la ronda.
+
+          Por ejemplo la aplicación de esta operación entre una matriz de estado y una sub-clave llega a ser:
+
+          \input{\main/inc/matriz_ejemplo_addroundkey}
+      \end{enumerate}
+
+    \subsubsection{Expansión de clave}
+      Esta operación permite derivar sub-claves a partir de la clave inicial de cifrado, una para cada vuelta. Mediante esta operación se evitan los ataques de criptoanálisis, ataques de comprensión de función hash y ataques por clave relacionada. Al mismo tiempo esta operación elimina la simetria en cada ronda y entre las rondas del algoritmo, con lo cual se elimina también la posibilidad de claves débiles, error conocido en algoritmos como DES o IDEA.
+
+      El número de sub-claves a calcular es igual a N, ya que la primera operación a realizar es siempre un OR exclusivo entre la clave inicial y la primera matriz de estado, en este caso del texto en claro acomodado en la matriz de dimensión 4x4.
+
+      Se toma la clave inicial como la primera sub-clave $K_0$, por ejemplo:
+
+      \begin{center}
+        63 6C 61 76 65 20 64 65 20 31 32 38 62 69 74 73
+      \end{center}
+
+      \begin{enumerate}[label=\textbf{\arabic*}.]
+        \item \textbf{RotWord} \\
+          Se selecciona la última columna o palabra de la sub-clave y se rota el byte superior de manera vertical.
+    
+          \begin{table}[H]
+            \centering
+            \input{\main/inc/matriz_clave_inicial_ejemplo}
+          \end{table}
+    
+        \item \textbf{SubBytes} \\
+          Se sustituyen los valores de acuerdo a la tabla de sustitución S-Box de Rijndael.
+
+          \input{\main/inc/matriz_sbox_rijndael_ejemplo}
+    
+        \item \textbf{XOR [i-3]} \\
+          Se realiza la operación de OR exclusivo con la columna que se encuentra 3 posiciones atrás en la matriz de estado de la sub-clave.
+    
+          \input{\main/inc/matriz_xor_i_3}
+
+        \item \textbf{XOR [RCON]} \\
+          En este paso se utiliza un vector constante conocido como RCON.
+          
+          \input{\main/inc/matriz_rcon}
+
+          El último resultado se opera en OR exclusivo con la llave de la ronda “i” que se esté calculando. Por ejemplo, para la primera ronda de acuerdo al resultado del paso anterior:
+    
+          \input{\main/inc/matriz_ejemplo_rcon_1}
+
+          Con este último paso se habrá calculado la primera palabra de la primera sub-clave. Para las otras 3 palabras tan solo se realiza una operación XOR entre el último resultado y el que ocupa tres posiciones atrás, es decir, XOR [i-3]:
+          
+          \begin{table}[H]
+            \centering
+            \input{\main/inc/matriz_ejemplo_rcon_2}
+          \end{table}
+
+          Este último paso se repite hasta formar por completo la subclave:
+
+          \input{\main/inc/matriz_ejemplo_rcon_3}
+      \end{enumerate}
+
+    \subsubsection{Operaciones para el proceso de descifrado}
+      El proceso de descifrado es el mismo que el cifrado pero en orden contrario y con las funciones inversas:
+
+      \begin{figure}[H]
+        \centering
+        \caption{Algoritmo AES Rijndael}
+        \input{\main/inc/cuadro_algoritmo_aes_inverso}
+        \caption*{\textbf{Fuente:} Elaboración propia}
+      \end{figure}
+
+      \begin{enumerate}[label=\textbf{\arabic*}.]
+        \item \textbf{InvSubBytes} \\
+          Al igual que en la transformación SubBytes, se realiza la sustitución de la matriz de estado byte a byte, pero en este caso se utiliza la tabla inversa de S-Box.
+
+          \begin{table}[H]
+            \scriptsize
+            \centering
+            \caption{Tabla S-Box inversa}
+            \input{\main/inc/tabla_s_box_inversa}
+            \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
+          \end{table}
         
+        \item \textbf{InvShiftRows} \\
+          Es la transformación contraria a ShiftRows, por tanto consiste en rotar los bytes de la matriz de estado hacia la derecha en lugar de hacia la izquierda; es decir, en sentido contrario a ShiftRows.
 
+          \begin{table}[H]
+            \centering
+            \input{\main/inc/tabla_ejemplo_shiftrows_inverso}
+          \end{table}
 
+        \item \textbf{InvMixColumns} \\
+          La transformación inversa a MixColumns se la realiza multiplicando cada columna de la matriz de estado en módulo $x^4 + 1$ por el polinomio $m'(x) = (0B)x^3 + (0D)x^2 + (09)x + 0E$.
 
+          La relación de los polinomios $m(x)$ y $m'(x)$ es tal que:
 
+          \begin{equation}
+            m(x) \otimes m'(x) = 01
+          \end{equation}
 
-    \end{enumerate}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  El número de sub-claves a calcular es igual a N, ya que la primera operación a realizar es siempre un OR exclusivo entre la clave inicial y la primera matriz de estado, en este caso del texto en claro acomodado en la matriz de dimensión 4x4.
+        \item \textbf{InvAddRoundKey} \\
+          Esta operación es la misma que AddRoundKey con la única diferencia de que se utiliza primero la última sub-clave generada en la expansión y por consiguiente se utiliza al final la clave utilizada para el cifrado.
+      \end{enumerate}
   
-  El proceso de descifrado es el mismo pero en orden contrario:
 
-  \begin{figure}[H]
-    \centering
-    \caption{Algoritmo AES Rijndael}
-    \input{\main/inc/cuadro_algoritmo_aes_inverso}
-    \caption*{\textbf{Fuente:} Elaboración propia}
-  \end{figure}
-
-  \subsubsection{Expansión de clave}
-
-  Se toma la clave inicial como la primera sub-clave $K_0$, por ejemplo:
-
-  \begin{center}
-    63 6C 61 76 65 20 64 65 20 31 32 38 62 69 74 73
-  \end{center}
-
-  \begin{enumerate}[label=\textbf{\arabic*}.]
-    \item \textbf{RotWord} \\
-      Se selecciona la última columna o palabra de la sub-clave y se rota el byte superior de manera vertical.
-
-      \begin{table}[H]
-        \centering
-        \input{\main/inc/matriz_clave_inicial_ejemplo}
-      \end{table}
-
-    \item \textbf{SubBytes} \\
-      Se sustituyen los valores de acuerdo a la tabla de sustitución S-Box de Rijndael.
-
-      \begin{table}[H]
-        \centering
-        \input{\main/inc/matriz_sbox_rijndael_ejemplo}
-      \end{table}
-
-    \item \textbf{XOR [i-3]} \\
-      Se realiza la operación de OR exclusivo con la columna que se encuentra 3 posiciones atrás en la matriz de estado de la sub-clave.
-
-      \begin{table}[H]
-        \centering
-        \input{\main/inc/matriz_xor_i_3}
-      \end{table}
-
-      
-  \end{enumerate}
 
 
 
