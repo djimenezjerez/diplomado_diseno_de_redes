@@ -32,7 +32,7 @@
   right=30mm,
   bottom=25mm,
   left=35mm,
-  footskip=15mm,
+  footskip=5mm,
   nohead,
   nomarginpar,
   heightrounded
@@ -193,7 +193,6 @@
       \fi
     \fi
     \large \bfseries #1\par\nobreak
-    \vskip 0.5em
   }
 }
 \def\@makeschapterhead#1{
@@ -201,25 +200,24 @@
     \parindent \z@ \centering
     \normalfont
     \large \bfseries #1\par\nobreak
-    \vskip 0.5em
   }
 }
 \renewcommand\section{\@startsection
   {section}{1}{\z@}
-  {-3.5ex \@plus -1ex \@minus -.2ex}
-  {2.3ex \@plus.2ex}
+  {-2.5ex \@plus -1ex \@minus -.2ex}
+  {0.5ex \@plus.2ex}
   {\normalfont\large\bfseries}
 }
 \renewcommand\subsection{\@startsection
   {subsection}{2}{\z@}
-  {-3.5ex \@plus -1ex \@minus -.2ex}
-  {2.3ex \@plus.2ex}
+  {-1.5ex \@plus -1ex \@minus -.2ex}
+  {0.5ex \@plus.2ex}
   {\normalfont\normalsize\bfseries}
 }
 \renewcommand\subsubsection{\@startsection
   {subsubsection}{3}{\z@}
-  {-3.5ex \@plus -1ex \@minus -.2ex}
-  {2.3ex \@plus.2ex}
+  {-1.0ex \@plus -1ex \@minus -.2ex}
+  {0.5ex \@plus.2ex}
   {\normalfont\normalsize\bfseries}
 }
 \makeatother

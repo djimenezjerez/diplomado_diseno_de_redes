@@ -56,7 +56,7 @@
     \item[$F_m=$] Fracción de tiempo que el sistema utiliza el subsistema mejorado
   \end{description}
 
-  \begin{figure}
+  \begin{figure}[H]
     \centering
     \caption{Clúster de alto rendimiento}
     \includegraphics[width=8cm, keepaspectratio]{marco_teorico/cluster_alto_rendimiento.jpg}
@@ -122,12 +122,14 @@
 
   El algoritmo AES Rijndael trabaja con mensajes divididos en bloques de 128 bits y llaves de logitud de 128, 192 y 256 bits. Por lo tanto con una llave de 128 bits el atacante necesitaría generar: $2^{56} = 3.4 \times 10^{38}$ llaves, tarea que en la actualidad, aún con computadoras tan potentes, el trabajo tardaría millones de años.
 
-  Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 \times 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 x 24 x 60 x 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
+  Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 \times 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 \times 24 \times 60 \times 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
 
   \vspace{-0.7cm}\begin{equation}
     \begin{aligned}
-    t &= \frac{3.4 \times 10^{38}}{143.5 \times 10^{15} x 31536000} \\
+    t &= \frac{3.4 \times 10^{38}}{143.5 \times 10^{15} \times 31536000} \\
+    \\
     t &= \frac{23.69 \times 10^{15}}{315.36} \\
+    \\
     t &= 75.13 \times 10^{12} a\tilde{n}os
     \end{aligned}
   \end{equation}
