@@ -47,16 +47,11 @@
 \usepackage{textcomp} %------- Tamaños de letras especiales -------%
 \usepackage{gensymb} %------- Generador de símbolos -------%
 \usepackage{caption} %------- Referencias en figuras y cuadros -------%
-%------- Enlaces a páginas web -------%
-\usepackage[hidelinks, unicode=true]{hyperref}
-\hypersetup{
-  colorlinks=false,
-  linktoc=all,
-  linkcolor=blue
-}
 %-------------------------------------%
 \usepackage[bottom, hang, flushmargin]{footmisc} %------- Pie de página siempre al borde inferior -------%
+\usepackage[colorlinks=true, citecolor=black, urlcolor=black, linkcolor=black, linktoc=all]{hyperref}
 \usepackage{footnotebackref}
+%------- Enlaces a páginas web -------%
 %------- Eliminar espacio antes de las figuras -------%
 \usepackage{etoolbox}
 \BeforeBeginEnvironment{wrapfigure}{\vskip-0.5em}
