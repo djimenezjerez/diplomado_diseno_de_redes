@@ -10,7 +10,7 @@
 
   La computación paralela es una rama de la informática que se encarga del estudio de la ejecución de una tarea dividida en sub-procesos o varias tareas independientes de forma simultánea en forma de hilos de ejecución en un grupo de procesadores llamados también procesadores multinúcleo, que luego de realizar dichas tareas sincronizan sus resultados a fin de mantener la integridad de los datos.
 
-  \begin{figure}[H]
+  \begin{figure}
     \centering
     \caption{Disposición de un microprocesadores multinúcleo}
     \input{\main/inc/cuadro_procesador}
@@ -23,7 +23,7 @@
 
   El incremento de la frecuencia en los microprocesador acarrea consigo el consumo de energía y la disminución del espacio entre los transistores dentro de cada núcleo, lo que provoca un incremento considerable de la temperatura dentro del microprocesador; por tanto, para mantener el microprocesador en funcionamiento evitando su deterioro por las temperaturas elevadas es necesario buscar fuentes más óptimas de enfriado como los tubos de conducción de gas o líquido, que incrementan aún más el consumo de energía y que son costosos para una PC de escritorio.
 
-  \begin{equation}
+  \vspace{-0.7cm}\begin{equation}
     T_m = T_a \cdot [( 1 - F_m ) + \frac{F_m}{A_m}]
     \label{ecuacion_amdahl}
   \end{equation}
@@ -43,7 +43,7 @@
 
   Despejando la ecuación \ref{ecuacion_amdahl} se obtiene la aceleración del programa completo una vez que se haya paralelizado uno o más algoritmos del programa.
 
-  \begin{equation}
+  \vspace{-0.7cm}\begin{equation}
     A = \frac{1}{( 1 - F_m ) + \frac{F_m}{A_m}}
     \label{ecuacion_amdahl_aceleracion}
   \end{equation}
@@ -56,7 +56,7 @@
     \item[$F_m=$] Fracción de tiempo que el sistema utiliza el subsistema mejorado
   \end{description}
 
-  \begin{figure}[H]
+  \begin{figure}
     \centering
     \caption{Clúster de alto rendimiento}
     \includegraphics[width=8cm, keepaspectratio]{marco_teorico/cluster_alto_rendimiento.jpg}
@@ -107,7 +107,7 @@
     \caption*{\textbf{Fuente:} \cite{web:comparacion_pcie}}
   \end{table}
 
-  \section{AES}
+  \section{Algoritmo Estándar de Encriptación Avanzada Rijndael}
 
   El Estándar de Encriptación Avanzada fue de desarrollado mediante un concurso en 1997, por los criptógrafos Vincent Rijmen e Joan Daemen en el año 2001, como la sustitución al algoritmo DES\footnote{Estándar de Encriptación de Datos(Data Encryption Standard)} que había sido crackeado mediante la máquina DES Cracker construida por la ONG Electronic Frontier Foundation, con una inversión de 250 mil dólares. Este estándar fue aprobado y es utilizado por entes reguladores como la NSA\footnote{Agencia de Seguridad Nacional(National Security Agency)} y se estandariza mediante la norma ISO/IEC 18033 [\cite{standard:iso_18033}].
 
@@ -124,7 +124,7 @@
 
   Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 \times 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 x 24 x 60 x 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
 
-  \begin{equation}
+  \vspace{-0.7cm}\begin{equation}
     \begin{aligned}
     t &= \frac{3.4 \times 10^{38}}{143.5 \times 10^{15} x 31536000} \\
     t &= \frac{23.69 \times 10^{15}}{315.36} \\
@@ -163,13 +163,13 @@
 
     Este algoritmo es conformado por rondas en las que se ejecutan 4 funciones matemáticas en un orden establecido. El resultado de cada ronda es llamado \textit{Estado} que es una matriz de 4 filas por $N_b$ columnas, donde:
 
-    \begin{equation}
+    \vspace{-0.7cm}\begin{equation}
       N_b = \frac{Tama\tilde{n}o\ de\ bloque\ utilizado\ en\ bits}{32}
     \end{equation}
 
     De manera similar, la clave inicial se representa mediante una matriz de 4 filas y $N_k$ columnas, donde:
 
-    \begin{equation}
+    \vspace{-0.7cm}\begin{equation}
       N_k = \frac{Tama\tilde{n}o\ de\ la\ clave\ en\ bits}{32}
     \end{equation}
     
@@ -396,7 +396,7 @@
 
           La relación de los polinomios $m(x)$ y $m'(x)$ es tal que:
 
-          \begin{equation}
+          \vspace{-0.7cm}\begin{equation}
             m(x) \otimes m'(x) = 01
           \end{equation}
 
@@ -404,14 +404,206 @@
           Esta operación es la misma que AddRoundKey con la única diferencia de que se utiliza primero la última sub-clave generada en la expansión y por consiguiente se utiliza al final la clave utilizada para el cifrado.
       \end{enumerate}
   
+  \section{Paralelización del algoritmo AES Rijndael}
 
+    Para la ejecución del algoritmo se utilizó el script en el entorno Python que se muestra en el Anexo \ref{anexo:script_aes_original}, mismo que fue desarrollado por Pablo Caro en Septiembre del año 2013.
 
+    Este algoritmo fue modificado para la ejecución de sus funciones en paralelo mediante la librería Numba que cuenta con soporte para GPU CUDA, las modificaciones se muestran en el Anexo \ref{anexo:script_aes_modificado}.
 
+    El entorno de trabajo se detalla en la sección [\ref{limites_alcances}] referente a Límites y Alcances.
 
+    El tamaño de bloque a cifrar fue de 128 bits, lo que elimina el tiempo de ejecución de la operación de padding o el del recorte en sub-bloques.
 
+    Los tiempos de cifrado y descifrado fueron tomados de acuerdo a las longitudes de clave estándar que son: 128, 192 y 256 bits. El proceso se ejecutó un total 1000 veces por cada longitud de clave. Cada proceso generó una muestra cuyo resultado generó un promedio de la diferencia de tiempos de ejecución entre CPU y GPU.
 
+    \subsection{Comparación de tiempos de ejecución}
 
+      \subsubsection{Cifrado con llave de 128 bits}
 
+        \begin{figure}[H]
+          \centering
+          \caption{Cifrado con llave de 128 bits para un total de 1000 muestras}
+          \includegraphics[width=15cm, keepaspectratio]{marco_teorico/cifrado_128_bits.png}
+          \caption*{\textbf{Fuente:} Elaboración propia}
+        \end{figure}
 
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{CPU}} = 545.33\mu s
+        \end{equation}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{GPU}} = 382.99\mu s
+        \end{equation}
+
+        Aceleración del algoritmo ejecutado en GPU respecto a la ejecución en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{\overline{t_{CPU}}}{\overline{t_{GPU}}} = \frac{545.33\mu s}{382.99\mu s} = 1.42x
+        \end{equation}
+
+        Por tanto, la ejecución del algoritmo de cifrado en GPU es 1.42 veces más rápido que la ejecución en CPU, para un tamaño de llave de 128 bits.
+
+      \subsubsection{Cifrado con llave de 192 bits}
+
+        \begin{figure}[H]
+          \centering
+          \caption{Cifrado con llave de 192 bits para un total de 1000 muestras}
+          \includegraphics[width=15cm, keepaspectratio]{marco_teorico/cifrado_192_bits.png}
+          \caption*{\textbf{Fuente:} Elaboración propia}
+        \end{figure}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{CPU}} = 571.27\mu s
+        \end{equation}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{GPU}} = 412.92\mu s
+        \end{equation}
+
+        Aceleración del algoritmo ejecutado en GPU respecto a la ejecución en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{\overline{t_{CPU}}}{\overline{t_{GPU}}} = \frac{571.27\mu s}{412.92\mu s} = 1.38x
+        \end{equation}
+
+        Por tanto, la ejecución del algoritmo de cifrado en GPU es 1.38 veces más rápido que la ejecución en CPU, para un tamaño de llave de 192 bits.
+
+      \subsubsection{Cifrado con llave de 256 bits}
+
+        \begin{figure}[H]
+          \centering
+          \caption{Cifrado con llave de 256 bits para un total de 1000 muestras}
+          \includegraphics[width=15cm, keepaspectratio]{marco_teorico/cifrado_256_bits.png}
+          \caption*{\textbf{Fuente:} Elaboración propia}
+        \end{figure}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{CPU}} = 641.68\mu s
+        \end{equation}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{GPU}} = 451.16\mu s
+        \end{equation}
+
+        Aceleración del algoritmo ejecutado en GPU respecto a la ejecución en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{\overline{t_{CPU}}}{\overline{t_{GPU}}} = \frac{641.68\mu s}{451.16\mu s} = 1.42x
+        \end{equation}
+
+        Por tanto, la ejecución del algoritmo de cifrado en GPU es 1.42 veces más rápido que la ejecución en CPU, para un tamaño de llave de 256 bits.
+
+      \subsubsection{Descifrado con llave de 128 bits}
+
+        \begin{figure}[H]
+          \centering
+          \caption{Descifrado con llave de 128 bits para un total de 1000 muestras}
+          \includegraphics[width=15cm, keepaspectratio]{marco_teorico/descifrado_128_bits.png}
+          \caption*{\textbf{Fuente:} Elaboración propia}
+        \end{figure}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{CPU}} = 640.24\mu s
+        \end{equation}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{GPU}} = 449.68\mu s
+        \end{equation}
+
+        Aceleración del algoritmo ejecutado en GPU respecto a la ejecución en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{\overline{t_{CPU}}}{\overline{t_{GPU}}} = \frac{640.24\mu s}{449.68\mu s} = 1.42x
+        \end{equation}
+
+        Por tanto, la ejecución del algoritmo de descifrado en GPU es 1.42 veces más rápido que la ejecución en CPU, para un tamaño de llave de 128 bits.
+
+      \subsubsection{Descifrado con llave de 192 bits}
+
+        \begin{figure}[H]
+          \centering
+          \caption{Descifrado con llave de 192 bits para un total de 1000 muestras}
+          \includegraphics[width=15cm, keepaspectratio]{marco_teorico/descifrado_192_bits.png}
+          \caption*{\textbf{Fuente:} Elaboración propia}
+        \end{figure}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{CPU}} = 745.25\mu s
+        \end{equation}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{GPU}} = 448.18\mu s
+        \end{equation}
+
+        Aceleración del algoritmo ejecutado en GPU respecto a la ejecución en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{\overline{t_{CPU}}}{\overline{t_{GPU}}} = \frac{745.25\mu s}{448.18\mu s} = 1.66x
+        \end{equation}
+
+        Por tanto, la ejecución del algoritmo de descifrado en GPU es 1.66 veces más rápido que la ejecución en CPU, para un tamaño de llave de 192 bits.
+
+      \subsubsection{Descifrado con llave de 256 bits}
+
+        \begin{figure}[H]
+          \centering
+          \caption{Descifrado con llave de 256 bits para un total de 1000 muestras}
+          \includegraphics[width=15cm, keepaspectratio]{marco_teorico/descifrado_256_bits.png}
+          \caption*{\textbf{Fuente:} Elaboración propia}
+        \end{figure}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{CPU}} = 748.93\mu s
+        \end{equation}
+
+        Tiempo promedio de ejecución del algoritmo en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \overline{t_{GPU}} = 520.02\mu s
+        \end{equation}
+
+        Aceleración del algoritmo ejecutado en GPU respecto a la ejecución en CPU:
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{\overline{t_{CPU}}}{\overline{t_{GPU}}} = \frac{748.93\mu s}{520.02\mu s} = 1.44x
+        \end{equation}
+
+        Por tanto, la ejecución del algoritmo de descifrado en GPU es 1.44 veces más rápido que la ejecución en CPU, para un tamaño de llave de 256 bits.
+
+    \subsection{Cálculo de la aceleración del algoritmo ejecutado en GPU con respecto a la ejecución en CPU}
+
+        De acuerdo a los resultados mostrados anteriormente, se puede calcular el promedio de aceleración del algoritmo de cifrado ejecutado en GPU con respecto a la ejecución en CPU.
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{1.42 + 1.38 + 1.42}{3} = 1.41x
+        \end{equation}
+
+        De igual manera se puede calcular el promedio de aceleración del algoritmo de descifrado ejecutado en GPU con respecto a la ejecución en CPU.
+
+        \vspace{-0.7cm}\begin{equation}
+          \frac{1.42 + 1.66 + 1.44}{3} = 1.51x
+        \end{equation}
 
 \end{document}

@@ -1,0 +1,59 @@
+\begin{lstlisting}
+from numba import cuda, jit
+import sys
+import os.path
+from ProgressBar import ProgressBar
+from AES_base import sbox, isbox, gfp2, gfp3, gfp9, gfp11, gfp13, gfp14, Rcon
+
+if sys.version_info[0] == 3:
+  raw_input = input
+
+@cuda.jit('uint8(uint8)')
+def RotWord(word):
+  return word[1:] + word[0:1]
+
+@cuda.jit('uint8(uint8)')
+def SubWord(word):
+  return [sbox[byte] for byte in word]
+
+@cuda.jit('uint8[:](uint8[:])')
+def SubBytes(state):
+  return [[sbox[byte] for byte in word] for word in state]
+
+@cuda.jit('uint8[:](uint8[:])')
+def InvSubBytes(state):
+  return [[isbox[byte] for byte in word] for word in state]
+
+@cuda.jit('uint8[:](uint8[:])')
+def ShiftRows(state):
+  ...
+
+@cuda.jit('uint8[:](uint8[:])')
+def InvShiftRows(state):
+  ...
+
+@cuda.jit('uint8[:](uint8[:])')
+def MixColumns(state):
+  ...
+
+@cuda.jit('uint8[:](uint8[:])')
+def InvMixColumns(state):
+  ...
+
+@cuda.jit('uint8[:](uint8[:], uint8[:])')
+def AddRoundKey(state, key):
+  ...
+
+@cuda.jit('uint8[:](uint8[:], uint8, uint8, uint8)')
+def KeyExpansion(key, Nb=4, Nk=4, Nr=10):
+  ...
+
+...
+
+if __name__ == '__main__':
+  main()
+\end{lstlisting}
+
+\begin{itemize}
+  \item Python-AES-CUDA
+\end{itemize}
