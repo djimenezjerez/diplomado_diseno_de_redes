@@ -10,6 +10,12 @@
   \subfile{../tex/titulo.tex}
   \clearpage %------- Nueva página -------%
   \thispagestyle{empty} %------- Quitar numeración y cabeceras -------%
+
+  %------- Página de Introducción -------%
+  \subfile{../tex/introduccion.tex}
+  \clearpage %------- Nueva página -------%
+  \thispagestyle{empty} %------- Quitar numeración y cabeceras -------%
+
   \renewcommand*{\thepage}{}
 
   \tableofcontents
@@ -46,8 +52,8 @@
 \setcounter{page}{1}
 \renewcommand*{\thepage}{\arabic{page}}
 
-  \chapter{Introducción}
-  \subfile{../tex/introduccion.tex}
+  \chapter{Problemática}
+  \subfile{../tex/problematica.tex}
   \newpage %------- Nueva página -------%
 
   \chapter{Justificación del problema}

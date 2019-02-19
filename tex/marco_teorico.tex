@@ -115,12 +115,12 @@
 
   \begin{table}[H]
     \centering
-    \caption{Comparación de tecnologías PCI-E}
+    \caption{Combinaciones posibles por tamaño de llave}
     \input{\main/inc/tabla_tamano_clave}
-    \caption*{\textbf{Fuente:} \cite{web:tiempo_crack_aes}}
+    \caption*{\textbf{Fuente:} \cite{web:secure_mobile_aes_encryption}}
   \end{table}
 
-  El algoritmo AES Rijndael trabaja con mensajes divididos en bloques de 128 bits y llaves de logitud de 128, 192 y 256 bits. Por lo tanto con una llave de 128 bits el atacante necesitaría generar: $2^{56} = 3.4 \times 10^{38}$ llaves, tarea que en la actualidad, aún con computadoras tan potentes, el trabajo tardaría millones de años.
+  El algoritmo AES Rijndael trabaja con mensajes divididos en bloques de 128 bits y llaves de longitud de 128, 192 y 256 bits. Por lo tanto con una llave de 128 bits el atacante necesitaría generar: $2^{56} = 3.4 \times 10^{38}$ llaves, tarea que en la actualidad, aún con computadoras tan potentes, el trabajo tardaría millones de años.
 
   Suponiendo la super-computadora Summit de IBM [\cite{web:supercomputadora_summit_ibm}], designada para descifrar un mensaje, trabajando a $143.5PFlops$\footnote{Operaciones de Punto Flotante por Segundo(Floating point Operations Per Second)} o $143.5 \times 10^{15} Flops$ y sabiendo que la cantidad de segundos en un año es de: $365 \times 24 \times 60 \times 60 = 31536000$. Se calcula la cantidad de años necesarios para crackear AES con una longitud de clave de 128 bits.
 
@@ -204,7 +204,7 @@
 
       \begin{figure}[H]
         \centering
-        \caption{Algoritmo AES Rijndael}
+        \caption{Algoritmo AES Rijndael - Proceso de cifrado}
         \input{\main/inc/cuadro_algoritmo_aes}
         \caption*{\textbf{Fuente:} Elaboración propia}
       \end{figure}
@@ -368,7 +368,7 @@
 
       \begin{figure}[H]
         \centering
-        \caption{Algoritmo AES Rijndael}
+        \caption{Algoritmo AES Rijndael - Proceso de descifrado}
         \input{\main/inc/cuadro_algoritmo_aes_inverso}
         \caption*{\textbf{Fuente:} Elaboración propia}
       \end{figure}
