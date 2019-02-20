@@ -313,7 +313,7 @@
       \end{enumerate}
 
     \subsubsection{Expansión de clave}
-      Esta operación permite derivar sub-claves a partir de la clave inicial de cifrado, una para cada vuelta. Mediante esta operación se evitan los ataques de criptoanálisis, ataques de comprensión de función hash y ataques por clave relacionada. Al mismo tiempo esta operación elimina la simetria en cada ronda y entre las rondas del algoritmo, con lo cual se elimina también la posibilidad de claves débiles, error conocido en algoritmos como DES o IDEA.
+      Esta operación permite derivar sub-claves a partir de la clave inicial de cifrado, una para cada vuelta. Mediante esta operación se evitan los ataques de criptoanálisis, ataques de comprensión de función hash y ataques por clave relacionada. Al mismo tiempo esta operación elimina la simetría en cada ronda y entre las rondas del algoritmo, con lo cual se elimina también la posibilidad de claves débiles, error conocido en algoritmos como DES o IDEA.
 
       El número de sub-claves a calcular es igual a N, ya que la primera operación a realizar es siempre un OR exclusivo entre la clave inicial y la primera matriz de estado, en este caso del texto en claro acomodado en la matriz de dimensión 4x4.
 
