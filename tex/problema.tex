@@ -7,9 +7,9 @@
 
   \section{Planteamiento del problema}
 
-  La CPU ejecuta las tareas que le son asignadas de acuerdo a una secuencia definida mediante criterios de prioridad o tiempos de llegada, estos procesos pueden ser a su vez pausados para resolver tareas con un mayor nivel de criticidad de acuerdo al algoritmo de planificación de colas que la CPU utilice; de esta manera, estas tareas ingresan a una cola de espera, que dependiendo del trabajo de la CPU, pueden tardar un tiempo considerable en ser atendidos, e inclusive desecharse por la excesiva carga de trabajo de la CPU. En las comunicaciones encriptadas, dada la lógica inherente de los procesos de encriptación, los tiempos de ejecución pueden llegar a incrementarse hasta un punto insostenible para un solo procesador, por lo cual los fabricantes, de acuerdo a las limitaciones de tamaño y frecuencia máxima de la CPU, vieron necesario el incremento del número de procesadores a fin de atender los procesos en la cola y evitar desechar tareas por los tiempos excesivos de ejecución.
+  La CPU ejecuta las tareas que le son asignadas de acuerdo a una secuencia definida mediante criterios de prioridad o tiempos de llegada, estos procesos pueden ser a su vez pausados para resolver tareas con un mayor nivel de criticidad de acuerdo al algoritmo de planificación de colas que la CPU utilice; de esta manera, estas tareas ingresan a una cola de espera, que dependiendo del trabajo de la CPU, pueden tardar un tiempo considerable en ser atendidos, e inclusive desecharse por la excesiva carga de trabajo de la CPU. En las comunicaciones encriptadas, dada la lógica inherente de los procesos de encriptación, los tiempos de ejecución pueden llegar a incrementarse hasta un punto insostenible para un solo procesador, por lo cual los fabricantes, de acuerdo a las limitaciones de tamaño y frecuencia máxima de la CPU, vieron necesario el incremento del número de procesadores a fin de atender los procesos en la cola y evitar desechar tareas por los tiempos excesivos de ejecución. Por tanto el problema a resolver en esta investigación responde a la pregunta de si ¿sera menor el tiempo de ejecución del Algoritmo de Encriptación Avanzada AES Rijndael procesado en una malla de procesadores mediante la GPU con respecto a un número limitado de procesadores contenidos en la CPU, considerando que los procesadores de la GPU tienen una frecuencia menor, además de tener también un limitado número de operaciones?.
 
-  Para resolver este problema se plantea la alternativa de procesamiento descentralizado mediante la delegación de trabajos a la GPU; a su vez, se medirá la diferencia de tiempos mediante la comparación del tiempo de ejecución del Algoritmo de Encriptación Avanzada AES Rijndael ejecutado en la CPU versus el tiempo de ejecución del proceso en la GPU haciendo uso del entorno de programación Python, que cabe señalar, cuenta con compatibilidad nativa para la ejecución de tareas en matrices de procesadores CUDA mediante la librería Numba\footnote{\href{http://numba.pydata.org/numba-doc/latest/cuda/index.html}{NumPy+Mamba=Numba: Array-oriented Python Compiler for NumPy}}.
+  Para resolver este problema se plantea la alternativa de procesamiento descentralizado mediante la mencionada delegación de trabajos a la GPU; a su vez, se medirá la diferencia de tiempos mediante la comparación del tiempo de ejecución del Algoritmo de Encriptación Avanzada AES Rijndael ejecutado en la CPU versus el tiempo de ejecución del proceso en la GPU haciendo uso del entorno de programación Python, que cabe señalar, cuenta con compatibilidad nativa para la ejecución de tareas en matrices de procesadores CUDA mediante la librería Numba\footnote{\href{http://numba.pydata.org/numba-doc/latest/cuda/index.html}{NumPy+Mamba=Numba: Array-oriented Python Compiler for NumPy}}.
 
   \section{Justificación tecnológica}
 
@@ -45,10 +45,10 @@
 
   El relleno de datos de 128 bits cumple con el Estándar de Criptografía de Llave Pública PKCS \#7 plasmado en el reporte RFC 2315 [\cite{report:RFC_2315}].
 
-  \begin{figure}[H]
+  \begin{figure}
     \centering
     \caption{Microprocesador Intel i7-3770}
-    \includegraphics[width=7cm, keepaspectratio]{problema/intel_i7.jpg}
+    \includegraphics[width=6cm, keepaspectratio]{problema/intel_i7.jpg}
     \caption*{\textbf{Fuente:} \href{https://tinyurl.com/yb3tqpvu}{Intel® Core™ i7-3770 Processor, ark.intel.com}}
   \end{figure}
 
@@ -56,10 +56,10 @@
 
   El algoritmo, modificado para esta investigación, fue escrito originalmente por Pablo Caro y es de código abierto, se puede encontrar en la plataforma Github\footnote{\href{https://github.com/pcaro90/Python-AES}{Python-AES, Pablo Caro}}. El código original no cuenta con ninguna ejecución de procesos en paralelo.
 
-  \begin{figure}[H]
+  \begin{figure}
     \centering
     \caption{Tarjeta Gráfica NVidia GeForce GTX-650Ti}
-    \includegraphics[width=12cm, keepaspectratio]{problema/gtx_650ti.png}
+    \includegraphics[width=10cm, keepaspectratio]{problema/gtx_650ti.png}
     \caption*{\textbf{Fuente:} \href{https://tinyurl.com/ycr3kouv}{NVidia GeForce GTX-650Ti, www.geforce.com}}
   \end{figure}
 
@@ -70,4 +70,8 @@
   El driver de NVidia que se utilizó es de la versión 410.57-2 con el manejador de procesadores CUDA versión 10.0.130-2.
 
   La versión de Python utilizada fue 3.6.7, con las librerías externas Numba v0.41 y Numpy v1.15.1.
+
+  Con estos parámetros se llegará a determinar la diferencia de tiempos de ejecución en un sentido relacional, es decir cuantas veces mayor o menor llegará a ser el tiempo de ejecución del algoritmo en GPU con respecto a la ejecución del mismo en CPU. Se realizará este proceso de forma experimental con la reproducción del algoritmo para un número total de 1000 muestras en cada uno de los dos objetos de estudio.
+
+  Los procesos a llevarse a cabo son los de cifrado y descifrado, ambos con tres tipos de llaves: de 128, 192 y 256 bits.
 \end{document}

@@ -2,18 +2,34 @@
 
 \begin{document}
 \espacio
-  En este capítulo se muestran la metodología de investigación empleada en el trabajo.
+  En este capítulo se muestran la metodología de investigación empleada en el trabajo así como el tipo de presentación de cuadros estadísticos y resultados.
 
   \section{Metodología de investigación}
 
-  El método de enfoque para el desarrollo del proyecto es el método cuantitativo, ya que los resultados se demuestran con tablas comparativas recopiladas de las pruebas a ser ejecutadas en ambos ambientes de procesamiento. El instrumento de medición será un temporizador por software iniciado al momento de la ejecución de cada prueba y finalizado al terminar el procesamiento del algoritmo.
-  
+  El método de enfoque para el desarrollo del proyecto es el método cuantitativo, ya que los resultados se demuestran con tablas comparativas recopiladas de las pruebas ejecutadas en ambos ambientes de procesamiento. El instrumento de medición es un temporizador instanciado mediante software iniciado al momento de la ejecución de cada prueba y finalizado al terminar el procesamiento del algoritmo.
+
   A pesar de que el proceso tiene bases bibliográficas de acuerdo a los antecedentes; en este caso, los resultados aceptados serán los que provengan del proceso formal empírico, ya que se ejecutarán programas de cómputo para llegar a los resultados.
-  
+
   El grado de abstracción es el de una investigación aplicada, ya que su principal objetivo se basa en resolver el problemas práctico con un margen de generalización limitado de acuerdo a los límites propuestos.
 
   El método científico aplicado es el racionalista, ya que los resultados se toman en cuenta sin ninguna interpretación previa.
-  
-  El enfoque es positivista, ya que se desea demostrar la aserción del incremento de velocidad de ejecución del algoritmo AES Rijndael en GPU con respecto a la velocidad de ejecución en CPU.
+
+  A su vez, el enfoque es de tipo positivista, ya que se desea demostrar la aserción del incremento de velocidad de ejecución del algoritmo AES Rijndael en GPU con respecto a la velocidad de ejecución en CPU.
+
+  \section{Presentación de resultados}
+
+  Los datos para la obtención de resultados provienen de la ejecución del Algoritmo Estándar de Encriptación Avanzada AES Rijndael para los procesos de cifradro y descifrado con llaves de 128, 192 y 256 muestras ejecutados en GPU y CPU.
+
+  Con estos datos se presentan gráficas en las cuales se observan diferencias coherentes de tiempos de ejecución para el total de 1000 muestras de cada proceso en ambos ambientes.
+
+  Mediante estos resultados se continua con el cálculo de los promedios de tiempo para cada proceso ya que el uso de muestras aleatorias no reflejaría un resultado certero. Y finalmente se presenta el resultado que relaciona los tiempos promedios de ejecución en GPU vs CPU para cada tipo de proceso es decir cifrado y descifrado con los tamaños de llaves mencionados.
+
+  Para llegar a una conclusión se calcula el promedio de aceleración del algoritmo para el cifrado y para el descifrado, con los cuales se obtienen las pruebas de concepto mediante deducción lógica con la premisa de que: \textit{``Un tiempo de ejecución menor del algoritmo en GPU representa una aceleración de procesamiento en GPU con respecto a la ejecución del algoritmo en CPU''}.
+
+  \subsection{Cuadros estadísticos}
+
+  La serie estadística asimilada para la obtención de resultados es de tipo cuantitativa, con un espacio muestral compuesto por 1000 muestras para cada caso, cifrado y descifrado cada uno con tamaños de llaves de 128, 192 y 256 bits; haciendo un total de 6000 resultados agrupados en sus respectivas operaciones.
+
+  Estos resultados son representados en forma gráfica donde el eje vertical indica el tiempo que tomó cada muestra en ejecutarse vs el eje horizontal que indica el número de la muestra.
 
 \end{document}
