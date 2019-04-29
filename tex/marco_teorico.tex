@@ -6,7 +6,9 @@
 
   \section{Antecedentes}
 
-  \subsection{Computación paralela}
+
+
+  \section{Computación paralela}
 
   La computación paralela es una rama de la informática que se encarga del estudio de la ejecución de una tarea dividida en sub-procesos o varias tareas independientes de forma simultánea en forma de hilos de ejecución en un grupo de procesadores llamados también procesadores multinúcleo, que luego de realizar dichas tareas sincronizan sus resultados a fin de mantener la integridad de los datos.
 
@@ -174,7 +176,7 @@
     \vspace{-0.7cm}\begin{equation}
       N_k = \frac{Tama\tilde{n}o\ de\ la\ clave\ en\ bits}{32}
     \end{equation}
-    
+
     Las matrices se acomodan de tal forma que cada palabra (4 bytes = 32 bits) es representada en una columna de izquierda a derecha.
 
     Por ejemplo la frase: ``mensaje secreto.'' se convierte de ASCII a su representación hexadecimal, cuyo resultado es:
@@ -326,33 +328,33 @@
       \begin{enumerate}[label=\textbf{\arabic*}.]
         \item \textbf{RotWord} \\
           Se selecciona la última columna o palabra de la sub-clave y se rota el byte superior de manera vertical.
-    
+
           \begin{table}[H]
             \centering
             \input{\main/inc/matriz_clave_inicial_ejemplo}
           \end{table}
-    
+
         \item \textbf{SubBytes} \\
           Se sustituyen los valores de acuerdo a la tabla de sustitución S-Box de Rijndael.
 
           \input{\main/inc/matriz_sbox_rijndael_ejemplo}
-    
+
         \item \textbf{XOR [i-3]} \\
           Se realiza la operación de OR exclusivo con la columna que se encuentra 3 posiciones atrás en la matriz de estado de la sub-clave.
-    
+
           \input{\main/inc/matriz_xor_i_3}
 
         \item \textbf{XOR [RCON]} \\
           En este paso se utiliza un vector constante conocido como RCON.
-          
+
           \input{\main/inc/matriz_rcon}
 
           El último resultado se opera en OR exclusivo con la llave de la ronda “i” que se esté calculando. Por ejemplo, para la primera ronda de acuerdo al resultado del paso anterior:
-    
+
           \input{\main/inc/matriz_ejemplo_rcon_1}
 
           Con este último paso se habrá calculado la primera palabra de la primera sub-clave. Para las otras 3 palabras tan solo se realiza una operación XOR entre el último resultado y el que ocupa tres posiciones atrás, es decir, XOR [i-3]:
-          
+
           \begin{table}[H]
             \centering
             \input{\main/inc/matriz_ejemplo_rcon_2}
@@ -384,7 +386,7 @@
             \input{\main/inc/tabla_s_box_inversa}
             \caption*{\textbf{Fuente:} \cite{report:seguridad_europea_eeuu}}
           \end{table}
-        
+
         \item \textbf{InvShiftRows} \\
           Es la transformación contraria a ShiftRows, por tanto consiste en rotar los bytes de la matriz de estado hacia la derecha en lugar de hacia la izquierda; es decir, en sentido contrario a ShiftRows.
 
