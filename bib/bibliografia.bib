@@ -147,39 +147,156 @@
 }
 
 @MastersThesis{thesis:two_hash_cuda,
-  author = {Gorka Lerchundi Osa},
-  title  = {Fast Implementation of Two Hash Algorithms on nVidia CUDA GPU},
-  school = {Norwegian University of Science and Technology},
+  author = {Chris J. Thompson and Sahngyun Hahn and Mark Oskin},
+  title  = {Using modern graphics architectures for general-purpose computing: A framework and analysis},
+  school = {University of Washington},
   year   = {2009},
   type   = {mathesis},
   month  = feb,
 }
 
-@MastersThesis{thesis:algorithm_acceleration_cuda,
-  author = {Maksim Bobrov},
-  title  = {Cryptographic algorithm acceleration using CUDA enabled GPUs in typical system configurations},
-  school = {Rochester Institute of Technology},
-  year   = {2010},
-  type   = {mathesis},
-  month  = aug,
+@Article{article:secret_key_gpu,
+  author    = {Debra L. Cook and John Ioannidis and Angelos D. Keromytis and Jake Luck},
+  title     = {{CryptoGraphics}: Secret Key Cryptography Using Graphics Cards},
+  year      = {2005},
+  pages     = {334--350},
+  booktitle = {Lecture Notes in Computer Science},
+  doi       = {https://doi.org/10.1007/978-3-540-30574-3_23},
+  publisher = {Springer Berlin Heidelberg},
 }
 
-@MastersThesis{thesis:public_key_cuda,
-  author = {Hao Wu},
-  title  = {Implementation of public key algorithms in CUDA},
-  school = {Gjøvik University College},
-  year   = {2010},
-  type   = {mathesis},
-  month  = jun,
+@Article{article:symmetric_key_gpu,
+  author    = {Jason Yang and James Goodman},
+  title     = {Symmetric Key Cryptography on Modern Graphics Hardware},
+  year      = {2007},
+  pages     = {249--264},
+  booktitle = {Advances in Cryptology {\textendash} {ASIACRYPT} 2007},
+  doi       = {https://doi.org/10.1007/978-3-540-76900-2_15},
+  publisher = {Springer Berlin Heidelberg},
 }
 
-@MastersThesis{thesis:gpu_block_cipher,
-  author = {Urmas Rosenberg},
-  title  = {Using Graphic Processing Unit in Block Cipher Calculations},
-  school = {University of Tartu},
-  year   = {2007},
-  type   = {mathesis},
-  month  = feb,
+@Article{article:practical_symmetric_key_gpu,
+  author  = {Owen Harrison and John Waldron},
+  title   = {Practical Symmetric Key Cryptography on Modern Graphics Hardware},
+  journal = {17th conference on Security symposium},
+  year    = {2008},
+  pages   = {195–209},
+}
+
+@Article{article:encryption_commodity_gpu,
+  author    = {Owen Harrison and John Waldron},
+  title     = {{AES} Encryption Implementation and Analysis on Commodity Graphics Processing Units},
+  journal   = {14th international conference on World Wide Web},
+  year      = {2007},
+  pages     = {209--226},
+  booktitle = {Cryptographic Hardware and Embedded Systems - {CHES} 2007},
+  doi       = {https://doi.org/10.1007/978-3-540-74735-2_15},
+  publisher = {Springer Berlin Heidelberg},
+}
+
+@Article{article:design_parallel_aes_cuda,
+  author    = {Andrea Di Biagio and Alessandro Barenghi and Giovanni Agosta and Gerardo Pelosi},
+  title     = {Design of a parallel {AES} for graphics hardware using the {CUDA} framework},
+  year      = {2009},
+  month     = {may},
+  booktitle = {2009 {IEEE} International Symposium on Parallel {\&} Distributed Processing},
+  doi       = {10.1109/IPDPS.2009.5161242},
+  publisher = {{IEEE}},
+}
+
+@TechReport{report:fast_implementation_aes_smart_cards,
+  author    = {Chi-Feng Lu and Yan-Shun Kao and Hsia-Ling Chiang and Chung-Huang Yang},
+  title     = {Fast implementation of {AES} cryptographic algorithms in smart cards},
+  year      = {2009},
+  type      = {techreport},
+  month     = nov,
+  booktitle = {{IEEE} 37th Annual 2003 International Carnahan Conference {onSecurity} Technology, 2003. Proceedings.},
+  doi       = {10.1109/CCST.2003.1297622},
+  publisher = {{IEEE}},
+}
+
+@Article{article:cuda_aes_hardware_accelerator,
+  author    = {Svetlin A. Manavski},
+  title     = {{CUDA} Compatible {GPU} as an Efficient Hardware Accelerator for {AES} Cryptography},
+  year      = {2007},
+  booktitle = {2007 {IEEE} International Conference on Signal Processing and Communications},
+  doi       = {10.1109/ICSPC.2007.4728256},
+  publisher = {{IEEE}},
+}
+
+@Article{article:exploiting_gpu_asymmetric_cryptography,
+  author    = {Robert Szerwinski and Tim Güneysu},
+  title     = {Exploiting the Power of {GPUs} for Asymmetric Cryptography},
+  year      = {2008},
+  pages     = {79--99},
+  booktitle = {Cryptographic Hardware and Embedded Systems {\textendash} {CHES} 2008},
+  doi       = {https://doi.org/10.1007/978-3-540-85053-3_6},
+  publisher = {Springer Berlin Heidelberg},
+}
+
+@Article{article:efficient_cryptography_gpu,
+  author    = {Owen Harrison and John Waldron},
+  title     = {Efficient Acceleration of Asymmetric Cryptography on Graphics Hardware},
+  year      = {2009},
+  pages     = {350--367},
+  booktitle = {Progress in Cryptology {\textendash} {AFRICACRYPT} 2009},
+  doi       = {https://doi.org/10.1007/978-3-642-02384-2_22},
+  publisher = {Springer Berlin Heidelberg},
+}
+
+@TechReport{article:billion_mulmod_per_second,
+  author      = {Daniel J. Bernstein and Hsueh-Chung Chen and Ming-Shing Chen and Chen-Mou Cheng and Chun-Hung Hsiao and Tanja Lange and Zong-Cing Lin and Bo-Yin Yang},
+  title       = {The billion-mulmod-per-second PC},
+  institution = {University of Illinois at Chicago and National Taiwan University and Academia Sinica and Technische Universiteit Eindhoven},
+  year        = {2009},
+  type        = {techreport},
+}
+
+@InProceedings{report:2k_130_on_nvidia,
+  author    = {Daniel J. Bernstein and Hsieh-Chung Chen and Chen-Mou Cheng and Tanja Lange and Ruben Niederhagen and Peter Schwabe and Bo-Yin Yang},
+  title     = {{ECC}2K-130 on {NVIDIA} {GPUs}},
+  booktitle = {Progress in Cryptology - {INDOCRYPT} 2010},
+  year      = {2010},
+  pages     = {328--346},
+  publisher = {Springer Berlin Heidelberg},
+  doi       = {https://doi.org/10.1007/978-3-642-17401-8_23},
+}
+
+@InProceedings{report:ecm_on_gpu,
+  author    = {Daniel J. Bernstein and Tien-Ren Chen and Chen-Mou Cheng and Tanja Lange and Bo-Yin Yang},
+  title     = {{ECM} on Graphics Cards},
+  booktitle = {Advances in Cryptology - {EUROCRYPT} 2009},
+  year      = {2009},
+  pages     = {483--501},
+  publisher = {Springer Berlin Heidelberg},
+  doi       = {https://doi.org/10.1007/978-3-642-01001-9_28},
+}
+
+@InProceedings{report:throughput_md5_gpu,
+  author    = {Guang Hu and Jianhua Ma and Benxiong Huang},
+  title     = {High Throughput Implementation of {MD}5 Algorithm on {GPU}},
+  booktitle = {Proceedings of the 4th International Conference on Ubiquitous Information Technologies {\&} Applications},
+  year      = {2009},
+  month     = {dec},
+  publisher = {{IEEE}},
+  doi       = {10.1109/ICUT.2009.5405734},
+}
+
+@InProceedings{article:md5_rc4_gpu_cuda,
+  author    = {Changxin Li and Hongwei Wu and Shifeng Chen and Xiaochao Li and Donghui Guo},
+  title     = {Efficient implementation for {MD}5-{RC}4 encryption using {GPU} with {CUDA}},
+  booktitle = {2009 3rd International Conference on Anti-counterfeiting, Security, and Identification in Communication},
+  year      = {2009},
+  month     = {aug},
+  publisher = {{IEEE}},
+  doi       = {10.1109/ICASID.2009.5276924},
+}
+
+@TechReport{report:new_speed_time_encryption_gpu,
+  author      = {Rishabh Mukherjee and M. Suhail Rehman and Kishore Kothapalli and P. J. Narayanan and Kannan Srinathan},
+  title       = {Presenting new Speed records and constant time encryption on the GPU},
+  institution = {International Institute of Information Technology},
+  year        = {2009},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
