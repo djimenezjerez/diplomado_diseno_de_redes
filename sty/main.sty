@@ -32,7 +32,7 @@
   right=30mm,
   bottom=25mm,
   left=35mm,
-  footskip=5mm,
+  footskip=7mm,
   nohead,
   nomarginpar,
   heightrounded
@@ -47,6 +47,9 @@
 \usepackage{textcomp} %------- Tamaños de letras especiales -------%
 \usepackage{gensymb} %------- Generador de símbolos -------%
 \usepackage{caption} %------- Referencias en figuras y cuadros -------%
+%------------------------------------------------------%
+%------ Formato para código fuente ------%
+\usepackage{minted}
 %-------------------------------------%
 \usepackage[bottom, hang, flushmargin]{footmisc} %------- Pie de página siempre al borde inferior -------%
 \usepackage[colorlinks=true, citecolor=black, urlcolor=black, linkcolor=black, linktoc=all]{hyperref}
@@ -120,9 +123,9 @@
 \counterwithout{table}{section} %------- Quitar sección de cuadros -------%
 %----------------------------------------------------------------------%
 \usepackage{csquotes}
-\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage[style=apa,backend=biber,doi=false]{biblatex}
 \DeclareLanguageMapping{spanish}{spanish-apa}
-\bibliography{../bib/bibliografia.bib}
+\addbibresource{../bib/bibliografia.bib}
 %------- Eliminar espacio antes de anexos y bibliografía -------%
 \usepackage{titlesec}
 \titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename~\thechapter}{0cm}{\Huge}
@@ -145,35 +148,6 @@
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 %------------------------------------------------------%
-%------ Formato para código fuente ------%
-\usepackage{listings}
-\lstset{
-  language=Python,
-  basicstyle=\scriptsize\ttfamily,
-  otherkeywords={self},
-  emph={MyClass,__init__},
-  emphstyle=\ttb\color{gray},
-  commentstyle=\color{green},
-  keywordstyle=\color{blue},
-  stringstyle=\color{red},
-  frame=tb,
-  showstringspaces=false
-  tabsize=2,
-  numbers=left,
-  basewidth={.48em},
-  lineskip={-0.1em},
-  breaklines=true,
-  literate=
-    {á}{{\'{a}}}1
-    {é}{{\'{e}}}1
-    {í}{{\'{i}}}1
-    {ó}{{\'{o}}}1
-    {ú}{{\'{u}}}1
-    {ñ}{{\~{n}}}1
-}
-\lstset{extendedchars=\true}
-\lstset{inputencoding=ansinew}
-%----------------------------------------%
 %-------- Tamaño de fuente y centrado en capítulos --------%
 \makeatletter
 \def\@makechapterhead#1{

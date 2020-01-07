@@ -1,4 +1,4 @@
-\begin{lstlisting}
+\begin{minted}[framesep=1mm,baselinestretch=0.9,fontsize=\footnotesize,linenos]{python}
 import sys
 import os.path
 from ProgressBar import ProgressBar
@@ -291,7 +291,7 @@ def main():
     "Enter a key, formed by {0} hexadecimal digits: ".format(Nk * 8))
   key = key.replace(' ', '')
   if len(key) < Nk * 8:
-    print ("Key too short. Filling with \'0\',"
+    print ("Key too short. Filling with '0',"
       "so the length is exactly {0} digits.".format(Nk * 8))
     key += "0" * (Nk * 8 - len(key))
   elif len(key) > Nk * 8:
@@ -343,8 +343,8 @@ def main():
   sys.exit()
 if __name__ == '__main__':
   main()
-\end{lstlisting}
+\end{minted}
 
 \begin{itemize}
-  \item \href{https://github.com/pcaro90/Python-AES}{Python-AES [\cite{web:script_aes_python}]:\\ github.com\/pcaro90\/Python-AES}
+  \item \href{https://github.com/pcaro90/Python-AES}{Python-AES [\cite{web:script_aes_python}]}
 \end{itemize}

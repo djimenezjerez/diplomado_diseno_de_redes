@@ -1,3 +1,4 @@
+% !TeX root = ../main/main.tex
 \documentclass[../main/main.tex]{subfiles}
 
 \begin{document}
@@ -7,7 +8,7 @@
   \section{Antecedentes}
 
   Después de que \cite{thesis:two_hash_cuda} hayan demostrado que los procesadores de las tarjetas gráficas se pueden utilizar también como procesadores de propósito general, \cite{article:secret_key_gpu} demostraron que la GPU se puede utilizar en procesos criptográficos. Sin embargo, con la estandarización de APIs para procesos criptográficos en CPU, la velocidad que se ganaba en la ejecución de tareas en GPU quedo insignificante en comparación con la ejecución en CPU. Posterior a ello se desarrollaron estándares de APIs para utilizar la GPU como procesadores de propósito general, es entonces que \cite{article:symmetric_key_gpu} así como \cite{article:practical_symmetric_key_gpu} demostraron como las GPUs contemporáneas podían utilizarse y sobrepasar a las CPUs en procesos de criptografía simétrica, obteniendo una aceleración de hasta 60 veces para el proceso del algoritmo de llave simétrica DES. Posteriormente muchas investigaciones en este campo fueron realizadas, entre ellas las de \cite{article:cuda_aes_hardware_accelerator}, \cite{article:encryption_commodity_gpu}, \cite{article:design_parallel_aes_cuda}.
-  
+
   \cite{article:exploiting_gpu_asymmetric_cryptography} así como \cite{article:efficient_cryptography_gpu} demostraron que la GPU puede utilizarse también para las tareas de criptografía asimétrica alcanzando hasta 481 millones de multiplicaciones modulares por segundo en una tarjeta gráfica Nvidia GTX 295, proceso utilizado en la competencia ECC\footnote{Certicom Elliptic Curve Cryptosystem} por \cite{report:ecm_on_gpu} y \cite{report:2k_130_on_nvidia}.
 
   Por otra parte también se implementaron funciones hash en tarjetas gráficas, como por ejemplo la función MD5 por \cite{report:throughput_md5_gpu} y \cite{article:md5_rc4_gpu_cuda}, o la función Blowfish por \cite{report:new_speed_time_encryption_gpu} demostrando un incremento muy significativo en la aceleración de los procesos con respecto a la ejecución en CPU.
