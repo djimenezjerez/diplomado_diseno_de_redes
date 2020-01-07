@@ -1,4 +1,4 @@
-\begin{minted}[framesep=1mm,baselinestretch=0.9,fontsize=\footnotesize,linenos]{python}
+\begin{minted}[framesep=0.7mm,baselinestretch=0.8,fontsize=\footnotesize,linenos]{python}
 from numba import cuda, jit
 import sys
 import os.path
@@ -47,8 +47,6 @@ def AddRoundKey(state, key):
 @cuda.jit('uint8[:](uint8[:], uint8, uint8, uint8)')
 def KeyExpansion(key, Nb=4, Nk=4, Nr=10):
   ...
-
-...
 
 if __name__ == '__main__':
   main()
