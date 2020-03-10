@@ -52,7 +52,7 @@
 \usepackage{minted}
 %-------------------------------------%
 \usepackage[bottom, hang, flushmargin]{footmisc} %------- Pie de página siempre al borde inferior -------%
-\usepackage[colorlinks=true, citecolor=black, urlcolor=black, linkcolor=black, linktoc=all]{hyperref}
+\usepackage[colorlinks=true, citecolor=black, urlcolor=black, linkcolor=black, linktoc=all, breaklinks]{hyperref}
 \usepackage{footnotebackref}
 %------- Enlaces a páginas web -------%
 %------- Eliminar espacio antes de las figuras -------%
@@ -86,10 +86,24 @@
 \usepackage{longtable} %------- Tablas largas -------%
 \captionsetup{justification=centering} %------- Referencias de figuras y cuadros centrados -------%
 %-------- Quitar espacio antes de índices --------%
-\usepackage{tocloft}
+\usepackage{titletoc, tocloft}
 \setlength{\cftbeforetoctitleskip}{-1cm} %------- Índice de contenidos -------%
 \setlength{\cftbeforeloftitleskip}{-1cm} %------- Índice de figuras -------%
 \setlength{\cftbeforelottitleskip}{-1cm} %------- Índice de cuadros -------%
+%-------- Espacio de tabulación para el árbol del índice --------%
+\setlength{\cftsecindent}{0.6cm}
+\setlength{\cftsubsecindent}{1.2cm}
+\setlength{\cftsubsubsecindent}{1.8cm}
+\setlength{\cftparaindent}{2.4cm}
+\setlength{\cftsubparaindent}{3cm}
+% Add Chapter word before each toc
+% \renewcommand{\thechapter}{\Roman{chapter}} % Capítulos en romanos
+\titlecontents{chapter}
+  [0pt]
+  {\bfseries}
+  {\MakeUppercase{\chaptername}\ \thecontentslabel \\ \quad}
+  {}
+  {\hfill\contentspage}
 %-------------------------------------------------%
 %-------- Crear índice de anexos --------%
 \newcommand{\listappendicesname}{\hfill \large Índice de Anexos \hfill}
@@ -123,8 +137,21 @@
 \counterwithout{table}{section} %------- Quitar sección de cuadros -------%
 %----------------------------------------------------------------------%
 \usepackage{csquotes}
-\usepackage[style=apa,backend=biber,doi=false]{biblatex}
+\usepackage[style=numeric-comp,terseinits=true,backend=biber,doi=false]{biblatex}
+\setcounter{biburllcpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
 \DeclareLanguageMapping{spanish}{spanish-apa}
+\DeclareNameAlias{default}{family-given}
+\renewcommand*{\revsdnamepunct}{}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map[overwrite=false]{
+      \step[fieldsource=note]
+      \step[fieldset=addendum, origfieldval, final]
+      \step[fieldset=note, null]
+    }
+  }
+}
 \addbibresource{../bib/bibliografia.bib}
 %------- Eliminar espacio antes de anexos y bibliografía -------%
 \usepackage{titlesec}

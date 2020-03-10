@@ -23,37 +23,17 @@
   %------------------------------%
   %------- indice de figuras -------%
 %  \setcounter{page}{1} %------- Reiniciar contador de páginas -------%
-
-\renewcommand*{\thepage}{\roman{page}}
-%  \pagenumbering{roman} %------- Numerar con números romanos -------%
-  \phantomsection
-  \addcontentsline{toc}{section}{Índice de figuras}\listoffigures
-  \cleardoublepage %------- Nueva página -------%
-  %---------------------------------%
-  %------- índice de cuadros -------%
-  \phantomsection
-  \addcontentsline{toc}{section}{Índice de cuadros}\listoftables
-  \cleardoublepage %------- Nueva página -------%
-  %----------------------------------%
-  %------- índice de anexos -------%
-
-  \newpage
-  \vspace*{-6.61em}
-
-  \phantomsection
-  \addcontentsline{toc}{section}{Índice de anexos}\listofappendices
-  \cleardoublepage %------- Nueva página -------%
-  %----------------------------------%
-  \newpage %------- Nueva página -------%
-%  \setcounter{page}{1} %------- Reiniciar contador de páginas -------%
   \pagenumbering{arabic} %------- Numerar con números arábigos -------%
 
 \mainmatter
 \setcounter{page}{1}
 \renewcommand*{\thepage}{\arabic{page}}
 
-  \chapter{Introducción}
+  \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+  \chapter*{Introducción}
+  \addcontentsline{toc}{chapter}{Introducción}
   \subfile{../tex/introduccion.tex}
+  \addtocontents{toc}{\protect\setcounter{tocdepth}{3}}
   \newpage %------- Nueva página -------%
 
   \chapter{Problema de investigación}
@@ -87,7 +67,7 @@
   \cleardoublepage
   \phantomsection
   \addcontentsline{toc}{chapter}{Bibliografía}
-  \nocite{*} %------- Eliminar formato por defecto de bibliografía -------%
+  % \nocite{*} %------- Añadir referencias no utilizadas de bibliografía -------%
   \printbibliography
 
   \setcounter{section}{0} %------- Reiniciar numeración de secciones -------%

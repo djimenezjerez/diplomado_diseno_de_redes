@@ -7,12 +7,14 @@
     \textbf{\large Resumen}
   \end{center}
 
-  En esta monografía se verificó el incremento en la velocidad de ejecución del algoritmo AES Rijndael ejecutado en GPU con respecto a la ejecución del mismo en CPU, mediante el paralelismo en la ejecución de tareas.
+  El presente estudio tiene el proposito de demostrar el incremento en la velocidad de ejecución del algoritmo AES Rijndael ejecutado en GPU con respecto a la ejecución del mismo en CPU, mediante el paralelismo de hilos y tareas.
 
-  Para demostrar la validez de dicho incremento en la velocidad de ejecución del algoritmo se realizaron pruebas mediante "Scripts" ejecutados en el entorno de desarrollo Python, los cuales generaron los resultados mostrados en los capítulos subsecuentes.
+  Para demostrar la validez de dicho incremento en la velocidad de ejecución del algoritmo se realizaron pruebas mediante ``Scripts'' ejecutados en el entorno de desarrollo Python, los cuales generaron los resultados mostrados en los capítulos subsecuentes.
 
-  Posterior a las pruebas realizadas se muestran las conclusiones, mediante las cuales se puede aseverar que la velocidad en ejecución del algoritmo AES Rijndael llega a incrementarse de manera significativa cuando éste es ejecutado en GPU, pero por la tecnología actual de bus de transferencia de datos, el tiempo ganado en el incremento de velocidad es opacado por el tiempo necesario para la transferencia desde y hacia la GPU para la extracción de los resultados. En base a la experiencia se concluye que actualmente existen dispositivos capaces de realizar cálculos densos en cuestión de fracciones de segundos, pero por la restricción física de las líneas de transmisión de datos, el tiempo para enviar y recibir datos, los resultados se obtienen en un tiempo de hasta x10 con respecto al tiempo utilizado para el cálculo en CPU.
+  Posterior a las pruebas realizadas, se llega a la conclusión de que la velocidad en ejecución del algoritmo AES Rijndael se incrementa de manera significativa cuando eñ algoritmo es ejecutado en la GPU, pero por limitaciones de la tecnología actual de bus de transferencia de datos, la diferencia de tiempo de ejecución en GPU es opacado por el tiempo necesario para la transferencia de datos desde y hacia la GPU.
 
-  No obstante, al igual que se logró el cambio de paradigma de procesadores de 32 bits a 64 bits, actualmente se están investigando medios de transferencia que no se limitan por las pistas de alguna aleación o de metal, a esta tecnología se la conoce como computación cuántica y será utilizada en un futuro cercano.
+  En base al presente estudio se puede concluir que actualmente existen dispositivos capaces de realizar cálculos densos en cuestión de fracciones de segundo, pero por la restricción física de las líneas de transmisión de datos actuales, los resultados se llegan a obtener en un tiempo que supera hasta en diez veces al tiempo utilizado para el cálculo en la propia CPU.
+
+  No obstante, al igual que se logró el cambio de paradigma de procesadores de 32 bits a 64 bits, actualmente se están investigando medios de transferencia que no se limitan por las pistas de alguna aleación o de metal, esta tecnología es conocida como computación cuántica y sin duda alguna se encontrará disponible para la población en general en futuro cercano.
 
 \end{document}
