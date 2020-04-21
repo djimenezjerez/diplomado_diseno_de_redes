@@ -4,9 +4,20 @@
 \begin{document}
 \espacio
 
+  \section{Conclusiones}
+
   \begin{itemize}[noitemsep,nolistsep]
     \item Se lograron paralelizar las funciones que contienen bucles que realizan operaciones repetitivas e independientes de cada ronda del algoritmo AES Rijndael para las operaciones de cifrado y descifrado, con la ejecución del algoritmo en entorno Python, utilizando la malla de procesadores CUDA de que dispone la GPU Nvidia 650Ti, mediante la librería Numba y los decoradores de funciones @jit. El programa modificado se muestra en el Anexo \ref{anexo:script_aes_modificado}.
     \item Con la modificación de este programa se pudieron obtener los tiempos de ejecución de las operaciones de cifrado y descifrado del algoritmo AES Rijndael para las longitudes de llave estándares de 128, 192 y 256 bits. De acuerdo a los resultados obtenidos se puede observar que la ejecución del algoritmo distribuyendo la carga de trabajo a la GPU es acelerada en 1.41 veces para la operación de cifrado y 1.51 veces para la operación de descifrado.
     \item Por tanto, se demostró que se puede liberar a la CPU de la carga de trabajo en la ejecución del algoritmo AES Rijndael realizando los cálculos necesarios en la GPU, y de esta forma hacer que la CPU pueda atender otros procesos en la espera de la obtención del resultado para cada ejecución de cifrado o descifrado. La razón por la cual actualmente este proceso todavía no es utilizado es debido a las limitaciones físicas del bus de conexión entre la CPU y la GPU, por lo cual el tiempo es incrementado en sobremanera durante el traslado de datos de la CPU a la GPU, para implementar este proceso es necesaria otra tecnología de conexión en el bus de intercambio de datos entre la CPU y la GPU.
   \end{itemize}
+
+  \section{Recomendaciones}
+
+  \begin{itemize}[noitemsep,nolistsep]
+    \item La alternativa utilizada para la paralelización del algoritmo en esta investigación fue la librería Numba en el entorno Python que es un entorno de alto nivel; se recomienda realizar la paralelización del algoritmo en entornos de bajo nivel como C o C++ y comparar los resultados obtenidos en esta investigación para concluir con mayor certeza la aceleración del algoritmo ejecutado en GPU.
+    \item En esta investigación se trabajó con el algoritmo AES Rijndael; se recomienda la ejecución de otros algoritmos de encriptación, simétricos y asimétricos, como IDEA o DES para comparar los resultados de la aceleración en ejecución de algoritmos simétricos con respecto a la ejecución de algoritmos asimétricos.
+    \item Dado el tiempo inherente de transferencia de datos entre la CPU y la GPU, se recomienda realizar la investigación de asignación de tareas a la GPU enfocada en la obtención de resultados con un método mas veloz en cuanto a la velocidad de bus, o bien no hacer uso de ningún bus y realizar las operaciones directamente en la GPU sin pasar por la CPU.
+  \end{itemize}
+
 \end{document}

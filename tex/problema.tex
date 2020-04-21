@@ -12,6 +12,20 @@
 
   Para resolver este problema se plantea la alternativa de procesamiento descentralizado mediante la mencionada delegación de trabajos a la GPU; a su vez, se medirá la diferencia de tiempos mediante la comparación del tiempo de ejecución del Algoritmo de Encriptación Avanzada AES Rijndael ejecutado en la CPU versus el tiempo de ejecución del proceso en la GPU haciendo uso del entorno de programación Python, que cabe señalar, cuenta con compatibilidad nativa para la ejecución de tareas en matrices de procesadores CUDA mediante la librería Numba\footnote{\href{http://numba.pydata.org/numba-doc/latest/cuda/index.html}{NumPy+Mamba=Numba: Array-oriented Python Compiler for NumPy}}.
 
+  \section{Objetivos}
+
+  \subsection{Objetivo general}
+
+  Demostrar el incremento de velocidad para la ejecución del algoritmo AES Rijndael en la Unidad de Procesamiento Gráfico (GPU) con respecto a la ejecución del algoritmo en la Unidad Central de Procesamiento (CPU).
+
+  \subsection{Objetivos específicos}
+
+  \begin{itemize}
+    \item Paralelizar los procesos del algoritmo AES Rijndael haciendo uso del entorno Python enfocado hacia la tecnología de malla de procesadores CUDA
+    \item Mediante la implementación de un programa destinado a la ejecución en la GPU, obtener la diferencia de tiempo de ejecución del algoritmo AES utilizando solo la CPU con respecto a la ejecución del algoritmo con la asistencia de la GPU
+    \item Liberar a la CPU de trabajo computacional para de forma, ejecutar otros procesos en la cola designando tareas pasibles a paralelización y cálculos matriciales a la GPU
+  \end{itemize}
+
   \section{Justificación tecnológica}
 
   Como se mencionó anteriormente, de acuerdo al paradigma actual del desarrollo de hardware de microprocesadores, se llegó a un límite difícil de superar con los materiales de fabricación actuales.
