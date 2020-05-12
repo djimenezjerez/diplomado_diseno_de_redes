@@ -42,6 +42,12 @@
 \usepackage{graphicx} %------- Para especificar tamaño de gráficos -------%
 \graphicspath{{../img/}{../inc/}}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{
+  pgfplots.groupplots,
+  pgfplots.units,
+}
+\pgfplotsset{compat=1.16, use units=true}
 %----------------------------------------------------%
 \usepackage{pdflscape} %------- Para hojas en paisaje -------%
 \usepackage{textcomp} %------- Tamaños de letras especiales -------%
@@ -55,11 +61,11 @@
 \usepackage[colorlinks=true, citecolor=black, urlcolor=black, linkcolor=black, linktoc=all, breaklinks]{hyperref}
 \usepackage{footnotebackref}
 %------- Enlaces a páginas web -------%
-%------- Eliminar espacio antes de las figuras -------%
+%------- Adicionar espacio antes de las figuras -------%
 \usepackage{etoolbox}
-\BeforeBeginEnvironment{wrapfigure}{\vskip-0.5em}
-\BeforeBeginEnvironment{figure}{\vskip-0.5em}
-\usepackage[skip=0.2em]{caption}
+\BeforeBeginEnvironment{wrapfigure}{\vskip+0.5em}
+\BeforeBeginEnvironment{figure}{\vskip+0.5em}
+\usepackage[skip=-0.2em]{caption}
 %-----------------------------------------------------%
 %------- No separar palabras -------%
 \usepackage[none]{hyphenat}
@@ -253,3 +259,4 @@
 \makeatother
 
 \usepackage{mathtools}
+\usepackage{siunitx}
